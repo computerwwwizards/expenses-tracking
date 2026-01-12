@@ -20,6 +20,7 @@ import { Route as LoginOtpIndexRouteImport } from './routes/login/otp/index'
 import { Route as privatehomeIndexRouteImport } from './routes/(private)/(home)/index'
 import { Route as privateBudgetIdIndexRouteImport } from './routes/(private)/$budgetId/index'
 import { Route as privatehomeBudgetsIndexRouteImport } from './routes/(private)/(home)/budgets/index'
+import { Route as privateBudgetIdIncomesIndexRouteImport } from './routes/(private)/$budgetId/incomes/index'
 
 const privateBudgetIdExpensesIndexLazyRouteImport = createFileRoute(
   '/(private)/$budgetId/expenses/',
@@ -70,11 +71,15 @@ const privatehomeIndexRoute = privatehomeIndexRouteImport
   .lazy(() =>
     import('./routes/(private)/(home)/index.lazy').then((d) => d.Route),
   )
-const privateBudgetIdIndexRoute = privateBudgetIdIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => privateBudgetIdRouteRoute,
-} as any)
+const privateBudgetIdIndexRoute = privateBudgetIdIndexRouteImport
+  .update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => privateBudgetIdRouteRoute,
+  } as any)
+  .lazy(() =>
+    import('./routes/(private)/$budgetId/index.lazy').then((d) => d.Route),
+  )
 const privateBudgetIdExpensesIndexLazyRoute =
   privateBudgetIdExpensesIndexLazyRouteImport
     .update({
@@ -96,6 +101,12 @@ const privatehomeBudgetsIndexRoute = privatehomeBudgetsIndexRouteImport
   .lazy(() =>
     import('./routes/(private)/(home)/budgets/index.lazy').then((d) => d.Route),
   )
+const privateBudgetIdIncomesIndexRoute =
+  privateBudgetIdIncomesIndexRouteImport.update({
+    id: '/incomes/',
+    path: '/incomes/',
+    getParentRoute: () => privateBudgetIdRouteRoute,
+  } as any)
 const privatehomeBudgetsCreateLazyRoute =
   privatehomeBudgetsCreateLazyRouteImport
     .update({
@@ -129,6 +140,7 @@ export interface FileRoutesByFullPath {
   '/': typeof privatehomeIndexRoute
   '/login/otp': typeof LoginOtpIndexRoute
   '/budgets/create': typeof privatehomeBudgetsCreateLazyRoute
+  '/$budgetId/incomes': typeof privateBudgetIdIncomesIndexRoute
   '/budgets': typeof privatehomeBudgetsIndexRoute
   '/$budgetId/expenses': typeof privateBudgetIdExpensesIndexLazyRoute
   '/budgets/edit/$budgetId': typeof privatehomeBudgetsEditBudgetIdLazyRoute
@@ -139,6 +151,7 @@ export interface FileRoutesByTo {
   '/': typeof privatehomeIndexRoute
   '/login/otp': typeof LoginOtpIndexRoute
   '/budgets/create': typeof privatehomeBudgetsCreateLazyRoute
+  '/$budgetId/incomes': typeof privateBudgetIdIncomesIndexRoute
   '/budgets': typeof privatehomeBudgetsIndexRoute
   '/$budgetId/expenses': typeof privateBudgetIdExpensesIndexLazyRoute
   '/budgets/edit/$budgetId': typeof privatehomeBudgetsEditBudgetIdLazyRoute
@@ -154,6 +167,7 @@ export interface FileRoutesById {
   '/(private)/(home)/': typeof privatehomeIndexRoute
   '/login/otp/': typeof LoginOtpIndexRoute
   '/(private)/(home)/budgets/create': typeof privatehomeBudgetsCreateLazyRoute
+  '/(private)/$budgetId/incomes/': typeof privateBudgetIdIncomesIndexRoute
   '/(private)/(home)/budgets/': typeof privatehomeBudgetsIndexRoute
   '/(private)/$budgetId/expenses/': typeof privateBudgetIdExpensesIndexLazyRoute
   '/(private)/(home)/budgets/edit/$budgetId': typeof privatehomeBudgetsEditBudgetIdLazyRoute
@@ -168,6 +182,7 @@ export interface FileRouteTypes {
     | '/'
     | '/login/otp'
     | '/budgets/create'
+    | '/$budgetId/incomes'
     | '/budgets'
     | '/$budgetId/expenses'
     | '/budgets/edit/$budgetId'
@@ -178,6 +193,7 @@ export interface FileRouteTypes {
     | '/'
     | '/login/otp'
     | '/budgets/create'
+    | '/$budgetId/incomes'
     | '/budgets'
     | '/$budgetId/expenses'
     | '/budgets/edit/$budgetId'
@@ -192,6 +208,7 @@ export interface FileRouteTypes {
     | '/(private)/(home)/'
     | '/login/otp/'
     | '/(private)/(home)/budgets/create'
+    | '/(private)/$budgetId/incomes/'
     | '/(private)/(home)/budgets/'
     | '/(private)/$budgetId/expenses/'
     | '/(private)/(home)/budgets/edit/$budgetId'
@@ -274,6 +291,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof privatehomeBudgetsIndexRouteImport
       parentRoute: typeof privatehomeRouteRoute
     }
+    '/(private)/$budgetId/incomes/': {
+      id: '/(private)/$budgetId/incomes/'
+      path: '/incomes'
+      fullPath: '/$budgetId/incomes'
+      preLoaderRoute: typeof privateBudgetIdIncomesIndexRouteImport
+      parentRoute: typeof privateBudgetIdRouteRoute
+    }
     '/(private)/(home)/budgets/create': {
       id: '/(private)/(home)/budgets/create'
       path: '/budgets/create'
@@ -293,11 +317,13 @@ declare module '@tanstack/react-router' {
 
 interface privateBudgetIdRouteRouteChildren {
   privateBudgetIdIndexRoute: typeof privateBudgetIdIndexRoute
+  privateBudgetIdIncomesIndexRoute: typeof privateBudgetIdIncomesIndexRoute
   privateBudgetIdExpensesIndexLazyRoute: typeof privateBudgetIdExpensesIndexLazyRoute
 }
 
 const privateBudgetIdRouteRouteChildren: privateBudgetIdRouteRouteChildren = {
   privateBudgetIdIndexRoute: privateBudgetIdIndexRoute,
+  privateBudgetIdIncomesIndexRoute: privateBudgetIdIncomesIndexRoute,
   privateBudgetIdExpensesIndexLazyRoute: privateBudgetIdExpensesIndexLazyRoute,
 }
 
