@@ -32,6 +32,12 @@ if(import.meta.env.DEV)
           async getName() {
             return ''
           },
+          async getColor() {
+            return ''
+          },
+          async getIcon() {
+            return ''
+          },
         }
       },
     })

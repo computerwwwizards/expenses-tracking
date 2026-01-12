@@ -26,7 +26,7 @@ export function ExpenseGroupCard({
       } as CSSProperties}
       itemId={expenseId} 
       {...props}>
-      <div className="flex items-center gap-3">
+      <article className="flex items-center gap-3">
         <div 
           className="text-(--custom-color) shrink-0 w-10 h-10 flex items-center justify-center"
         >
@@ -40,7 +40,7 @@ export function ExpenseGroupCard({
             S/. {amount.toFixed(2)}
           </span>
         </div>
-      </div>
+      </article>
     </EditableCard>
   );
 }
