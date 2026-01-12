@@ -1,19 +1,11 @@
 import { BasicChildContainer } from '@computerwwwizards/dependency-injection'
 import type { GlobalServices } from '@config/container/types'
 import { createFileRoute } from '@tanstack/react-router'
+import type { ExpensesSummaryServices } from './-config/expenses-summary'
+import plugin from './-config/expenses-summary'
 
-interface ExpenseSummary{
-  getTotal(workspaceId: string): Promise<number>;
-  listAllGroups(workspaceId: string):Promise<Array<{
-    groupName: string;
-    color: string;
-    amount: number;
-  }>>
-}
 
-interface ExpensesSummaryServices{
-  expenseSummary: ExpenseSummary
-}
+
 
 export const Route = createFileRoute('/(private)/$budgetId/')({
   beforeLoad({
@@ -26,6 +18,10 @@ export const Route = createFileRoute('/(private)/$budgetId/')({
       context.globalContainer
     )
     
+    summaryContainer
+      .useMocks()
+      .use(plugin)
+
     return {
       summaryContainer
     }
