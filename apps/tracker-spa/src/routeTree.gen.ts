@@ -8,14 +8,35 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LoginRouteRouteImport } from './routes/login/route'
 import { Route as privateRouteRouteImport } from './routes/(private)/route'
 import { Route as LoginIndexRouteImport } from './routes/login/index'
 import { Route as privatehomeRouteRouteImport } from './routes/(private)/(home)/route'
+import { Route as privateBudgetIdRouteRouteImport } from './routes/(private)/$budgetId/route'
 import { Route as LoginOtpIndexRouteImport } from './routes/login/otp/index'
 import { Route as privatehomeIndexRouteImport } from './routes/(private)/(home)/index'
-import { Route as privatehomeExpensesIndexRouteImport } from './routes/(private)/(home)/expenses/index'
+import { Route as privateBudgetIdIndexRouteImport } from './routes/(private)/$budgetId/index'
+import { Route as privatewithTabsExpensesIndexRouteImport } from './routes/(private)/(with-tabs)/expenses/index'
+import { Route as privatehomeBudgetsIndexRouteImport } from './routes/(private)/(home)/budgets/index'
+
+const privateBudgetIdExpensesIndexLazyRouteImport = createFileRoute(
+  '/(private)/$budgetId/expenses/',
+)()
+const privatehomeBudgetsCreateLazyRouteImport = createFileRoute(
+  '/(private)/(home)/budgets/create',
+)()
+const privatewithTabsExpensesGroupGroupIdLazyRouteImport = createFileRoute(
+  '/(private)/(with-tabs)/expenses/group/$groupId',
+)()
+const privatehomeBudgetsEditBudgetIdLazyRouteImport = createFileRoute(
+  '/(private)/(home)/budgets/edit/$budgetId',
+)()
+const privatewithTabsExpensesGroupEditGroupIdLazyRouteImport = createFileRoute(
+  '/(private)/(with-tabs)/expenses/group/edit/$groupId',
+)()
 
 const LoginRouteRoute = LoginRouteRouteImport.update({
   id: '/login',
@@ -35,6 +56,11 @@ const privatehomeRouteRoute = privatehomeRouteRouteImport.update({
   id: '/(home)',
   getParentRoute: () => privateRouteRoute,
 } as any)
+const privateBudgetIdRouteRoute = privateBudgetIdRouteRouteImport.update({
+  id: '/$budgetId',
+  path: '/$budgetId',
+  getParentRoute: () => privateRouteRoute,
+} as any)
 const LoginOtpIndexRoute = LoginOtpIndexRouteImport.update({
   id: '/otp/',
   path: '/otp/',
@@ -42,60 +68,194 @@ const LoginOtpIndexRoute = LoginOtpIndexRouteImport.update({
 } as any).lazy(() =>
   import('./routes/login/otp/index.lazy').then((d) => d.Route),
 )
-const privatehomeIndexRoute = privatehomeIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => privatehomeRouteRoute,
-} as any)
-const privatehomeExpensesIndexRoute = privatehomeExpensesIndexRouteImport
+const privatehomeIndexRoute = privatehomeIndexRouteImport
   .update({
-    id: '/expenses/',
-    path: '/expenses/',
+    id: '/',
+    path: '/',
     getParentRoute: () => privatehomeRouteRoute,
   } as any)
   .lazy(() =>
-    import('./routes/(private)/(home)/expenses/index.lazy').then(
-      (d) => d.Route,
-    ),
+    import('./routes/(private)/(home)/index.lazy').then((d) => d.Route),
   )
+const privateBudgetIdIndexRoute = privateBudgetIdIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => privateBudgetIdRouteRoute,
+} as any)
+const privateBudgetIdExpensesIndexLazyRoute =
+  privateBudgetIdExpensesIndexLazyRouteImport
+    .update({
+      id: '/expenses/',
+      path: '/expenses/',
+      getParentRoute: () => privateBudgetIdRouteRoute,
+    } as any)
+    .lazy(() =>
+      import('./routes/(private)/$budgetId/expenses/index.lazy').then(
+        (d) => d.Route,
+      ),
+    )
+const privatewithTabsExpensesIndexRoute =
+  privatewithTabsExpensesIndexRouteImport
+    .update({
+      id: '/(with-tabs)/expenses/',
+      path: '/expenses/',
+      getParentRoute: () => privateRouteRoute,
+    } as any)
+    .lazy(() =>
+      import('./routes/(private)/(with-tabs)/expenses/index.lazy').then(
+        (d) => d.Route,
+      ),
+    )
+const privatehomeBudgetsIndexRoute = privatehomeBudgetsIndexRouteImport
+  .update({
+    id: '/budgets/',
+    path: '/budgets/',
+    getParentRoute: () => privatehomeRouteRoute,
+  } as any)
+  .lazy(() =>
+    import('./routes/(private)/(home)/budgets/index.lazy').then((d) => d.Route),
+  )
+const privatehomeBudgetsCreateLazyRoute =
+  privatehomeBudgetsCreateLazyRouteImport
+    .update({
+      id: '/budgets/create',
+      path: '/budgets/create',
+      getParentRoute: () => privatehomeRouteRoute,
+    } as any)
+    .lazy(() =>
+      import('./routes/(private)/(home)/budgets/create.lazy').then(
+        (d) => d.Route,
+      ),
+    )
+const privatewithTabsExpensesGroupGroupIdLazyRoute =
+  privatewithTabsExpensesGroupGroupIdLazyRouteImport
+    .update({
+      id: '/(with-tabs)/expenses/group/$groupId',
+      path: '/expenses/group/$groupId',
+      getParentRoute: () => privateRouteRoute,
+    } as any)
+    .lazy(() =>
+      import('./routes/(private)/(with-tabs)/expenses/group/$groupId.lazy').then(
+        (d) => d.Route,
+      ),
+    )
+const privatehomeBudgetsEditBudgetIdLazyRoute =
+  privatehomeBudgetsEditBudgetIdLazyRouteImport
+    .update({
+      id: '/budgets/edit/$budgetId',
+      path: '/budgets/edit/$budgetId',
+      getParentRoute: () => privatehomeRouteRoute,
+    } as any)
+    .lazy(() =>
+      import('./routes/(private)/(home)/budgets/edit.$budgetId.lazy').then(
+        (d) => d.Route,
+      ),
+    )
+const privatewithTabsExpensesGroupEditGroupIdLazyRoute =
+  privatewithTabsExpensesGroupEditGroupIdLazyRouteImport
+    .update({
+      id: '/(with-tabs)/expenses/group/edit/$groupId',
+      path: '/expenses/group/edit/$groupId',
+      getParentRoute: () => privateRouteRoute,
+    } as any)
+    .lazy(() =>
+      import('./routes/(private)/(with-tabs)/expenses/group/edit/$groupId.lazy').then(
+        (d) => d.Route,
+      ),
+    )
 
 export interface FileRoutesByFullPath {
   '/login': typeof LoginRouteRouteWithChildren
+  '/$budgetId': typeof privateBudgetIdRouteRouteWithChildren
   '/login/': typeof LoginIndexRoute
+  '/$budgetId/': typeof privateBudgetIdIndexRoute
   '/': typeof privatehomeIndexRoute
   '/login/otp': typeof LoginOtpIndexRoute
-  '/expenses': typeof privatehomeExpensesIndexRoute
+  '/budgets/create': typeof privatehomeBudgetsCreateLazyRoute
+  '/budgets': typeof privatehomeBudgetsIndexRoute
+  '/expenses': typeof privatewithTabsExpensesIndexRoute
+  '/$budgetId/expenses': typeof privateBudgetIdExpensesIndexLazyRoute
+  '/budgets/edit/$budgetId': typeof privatehomeBudgetsEditBudgetIdLazyRoute
+  '/expenses/group/$groupId': typeof privatewithTabsExpensesGroupGroupIdLazyRoute
+  '/expenses/group/edit/$groupId': typeof privatewithTabsExpensesGroupEditGroupIdLazyRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginIndexRoute
+  '/$budgetId': typeof privateBudgetIdIndexRoute
   '/': typeof privatehomeIndexRoute
   '/login/otp': typeof LoginOtpIndexRoute
-  '/expenses': typeof privatehomeExpensesIndexRoute
+  '/budgets/create': typeof privatehomeBudgetsCreateLazyRoute
+  '/budgets': typeof privatehomeBudgetsIndexRoute
+  '/expenses': typeof privatewithTabsExpensesIndexRoute
+  '/$budgetId/expenses': typeof privateBudgetIdExpensesIndexLazyRoute
+  '/budgets/edit/$budgetId': typeof privatehomeBudgetsEditBudgetIdLazyRoute
+  '/expenses/group/$groupId': typeof privatewithTabsExpensesGroupGroupIdLazyRoute
+  '/expenses/group/edit/$groupId': typeof privatewithTabsExpensesGroupEditGroupIdLazyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(private)': typeof privateRouteRouteWithChildren
   '/login': typeof LoginRouteRouteWithChildren
+  '/(private)/$budgetId': typeof privateBudgetIdRouteRouteWithChildren
   '/(private)/(home)': typeof privatehomeRouteRouteWithChildren
   '/login/': typeof LoginIndexRoute
+  '/(private)/$budgetId/': typeof privateBudgetIdIndexRoute
   '/(private)/(home)/': typeof privatehomeIndexRoute
   '/login/otp/': typeof LoginOtpIndexRoute
-  '/(private)/(home)/expenses/': typeof privatehomeExpensesIndexRoute
+  '/(private)/(home)/budgets/create': typeof privatehomeBudgetsCreateLazyRoute
+  '/(private)/(home)/budgets/': typeof privatehomeBudgetsIndexRoute
+  '/(private)/(with-tabs)/expenses/': typeof privatewithTabsExpensesIndexRoute
+  '/(private)/$budgetId/expenses/': typeof privateBudgetIdExpensesIndexLazyRoute
+  '/(private)/(home)/budgets/edit/$budgetId': typeof privatehomeBudgetsEditBudgetIdLazyRoute
+  '/(private)/(with-tabs)/expenses/group/$groupId': typeof privatewithTabsExpensesGroupGroupIdLazyRoute
+  '/(private)/(with-tabs)/expenses/group/edit/$groupId': typeof privatewithTabsExpensesGroupEditGroupIdLazyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/login' | '/login/' | '/' | '/login/otp' | '/expenses'
+  fullPaths:
+    | '/login'
+    | '/$budgetId'
+    | '/login/'
+    | '/$budgetId/'
+    | '/'
+    | '/login/otp'
+    | '/budgets/create'
+    | '/budgets'
+    | '/expenses'
+    | '/$budgetId/expenses'
+    | '/budgets/edit/$budgetId'
+    | '/expenses/group/$groupId'
+    | '/expenses/group/edit/$groupId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/login' | '/' | '/login/otp' | '/expenses'
+  to:
+    | '/login'
+    | '/$budgetId'
+    | '/'
+    | '/login/otp'
+    | '/budgets/create'
+    | '/budgets'
+    | '/expenses'
+    | '/$budgetId/expenses'
+    | '/budgets/edit/$budgetId'
+    | '/expenses/group/$groupId'
+    | '/expenses/group/edit/$groupId'
   id:
     | '__root__'
     | '/(private)'
     | '/login'
+    | '/(private)/$budgetId'
     | '/(private)/(home)'
     | '/login/'
+    | '/(private)/$budgetId/'
     | '/(private)/(home)/'
     | '/login/otp/'
-    | '/(private)/(home)/expenses/'
+    | '/(private)/(home)/budgets/create'
+    | '/(private)/(home)/budgets/'
+    | '/(private)/(with-tabs)/expenses/'
+    | '/(private)/$budgetId/expenses/'
+    | '/(private)/(home)/budgets/edit/$budgetId'
+    | '/(private)/(with-tabs)/expenses/group/$groupId'
+    | '/(private)/(with-tabs)/expenses/group/edit/$groupId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -133,6 +293,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof privatehomeRouteRouteImport
       parentRoute: typeof privateRouteRoute
     }
+    '/(private)/$budgetId': {
+      id: '/(private)/$budgetId'
+      path: '/$budgetId'
+      fullPath: '/$budgetId'
+      preLoaderRoute: typeof privateBudgetIdRouteRouteImport
+      parentRoute: typeof privateRouteRoute
+    }
     '/login/otp/': {
       id: '/login/otp/'
       path: '/otp'
@@ -147,35 +314,112 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof privatehomeIndexRouteImport
       parentRoute: typeof privatehomeRouteRoute
     }
-    '/(private)/(home)/expenses/': {
-      id: '/(private)/(home)/expenses/'
+    '/(private)/$budgetId/': {
+      id: '/(private)/$budgetId/'
+      path: '/'
+      fullPath: '/$budgetId/'
+      preLoaderRoute: typeof privateBudgetIdIndexRouteImport
+      parentRoute: typeof privateBudgetIdRouteRoute
+    }
+    '/(private)/$budgetId/expenses/': {
+      id: '/(private)/$budgetId/expenses/'
+      path: '/expenses'
+      fullPath: '/$budgetId/expenses'
+      preLoaderRoute: typeof privateBudgetIdExpensesIndexLazyRouteImport
+      parentRoute: typeof privateBudgetIdRouteRoute
+    }
+    '/(private)/(with-tabs)/expenses/': {
+      id: '/(private)/(with-tabs)/expenses/'
       path: '/expenses'
       fullPath: '/expenses'
-      preLoaderRoute: typeof privatehomeExpensesIndexRouteImport
+      preLoaderRoute: typeof privatewithTabsExpensesIndexRouteImport
+      parentRoute: typeof privateRouteRoute
+    }
+    '/(private)/(home)/budgets/': {
+      id: '/(private)/(home)/budgets/'
+      path: '/budgets'
+      fullPath: '/budgets'
+      preLoaderRoute: typeof privatehomeBudgetsIndexRouteImport
       parentRoute: typeof privatehomeRouteRoute
+    }
+    '/(private)/(home)/budgets/create': {
+      id: '/(private)/(home)/budgets/create'
+      path: '/budgets/create'
+      fullPath: '/budgets/create'
+      preLoaderRoute: typeof privatehomeBudgetsCreateLazyRouteImport
+      parentRoute: typeof privatehomeRouteRoute
+    }
+    '/(private)/(with-tabs)/expenses/group/$groupId': {
+      id: '/(private)/(with-tabs)/expenses/group/$groupId'
+      path: '/expenses/group/$groupId'
+      fullPath: '/expenses/group/$groupId'
+      preLoaderRoute: typeof privatewithTabsExpensesGroupGroupIdLazyRouteImport
+      parentRoute: typeof privateRouteRoute
+    }
+    '/(private)/(home)/budgets/edit/$budgetId': {
+      id: '/(private)/(home)/budgets/edit/$budgetId'
+      path: '/budgets/edit/$budgetId'
+      fullPath: '/budgets/edit/$budgetId'
+      preLoaderRoute: typeof privatehomeBudgetsEditBudgetIdLazyRouteImport
+      parentRoute: typeof privatehomeRouteRoute
+    }
+    '/(private)/(with-tabs)/expenses/group/edit/$groupId': {
+      id: '/(private)/(with-tabs)/expenses/group/edit/$groupId'
+      path: '/expenses/group/edit/$groupId'
+      fullPath: '/expenses/group/edit/$groupId'
+      preLoaderRoute: typeof privatewithTabsExpensesGroupEditGroupIdLazyRouteImport
+      parentRoute: typeof privateRouteRoute
     }
   }
 }
 
+interface privateBudgetIdRouteRouteChildren {
+  privateBudgetIdIndexRoute: typeof privateBudgetIdIndexRoute
+  privateBudgetIdExpensesIndexLazyRoute: typeof privateBudgetIdExpensesIndexLazyRoute
+}
+
+const privateBudgetIdRouteRouteChildren: privateBudgetIdRouteRouteChildren = {
+  privateBudgetIdIndexRoute: privateBudgetIdIndexRoute,
+  privateBudgetIdExpensesIndexLazyRoute: privateBudgetIdExpensesIndexLazyRoute,
+}
+
+const privateBudgetIdRouteRouteWithChildren =
+  privateBudgetIdRouteRoute._addFileChildren(privateBudgetIdRouteRouteChildren)
+
 interface privatehomeRouteRouteChildren {
   privatehomeIndexRoute: typeof privatehomeIndexRoute
-  privatehomeExpensesIndexRoute: typeof privatehomeExpensesIndexRoute
+  privatehomeBudgetsCreateLazyRoute: typeof privatehomeBudgetsCreateLazyRoute
+  privatehomeBudgetsIndexRoute: typeof privatehomeBudgetsIndexRoute
+  privatehomeBudgetsEditBudgetIdLazyRoute: typeof privatehomeBudgetsEditBudgetIdLazyRoute
 }
 
 const privatehomeRouteRouteChildren: privatehomeRouteRouteChildren = {
   privatehomeIndexRoute: privatehomeIndexRoute,
-  privatehomeExpensesIndexRoute: privatehomeExpensesIndexRoute,
+  privatehomeBudgetsCreateLazyRoute: privatehomeBudgetsCreateLazyRoute,
+  privatehomeBudgetsIndexRoute: privatehomeBudgetsIndexRoute,
+  privatehomeBudgetsEditBudgetIdLazyRoute:
+    privatehomeBudgetsEditBudgetIdLazyRoute,
 }
 
 const privatehomeRouteRouteWithChildren =
   privatehomeRouteRoute._addFileChildren(privatehomeRouteRouteChildren)
 
 interface privateRouteRouteChildren {
+  privateBudgetIdRouteRoute: typeof privateBudgetIdRouteRouteWithChildren
   privatehomeRouteRoute: typeof privatehomeRouteRouteWithChildren
+  privatewithTabsExpensesIndexRoute: typeof privatewithTabsExpensesIndexRoute
+  privatewithTabsExpensesGroupGroupIdLazyRoute: typeof privatewithTabsExpensesGroupGroupIdLazyRoute
+  privatewithTabsExpensesGroupEditGroupIdLazyRoute: typeof privatewithTabsExpensesGroupEditGroupIdLazyRoute
 }
 
 const privateRouteRouteChildren: privateRouteRouteChildren = {
+  privateBudgetIdRouteRoute: privateBudgetIdRouteRouteWithChildren,
   privatehomeRouteRoute: privatehomeRouteRouteWithChildren,
+  privatewithTabsExpensesIndexRoute: privatewithTabsExpensesIndexRoute,
+  privatewithTabsExpensesGroupGroupIdLazyRoute:
+    privatewithTabsExpensesGroupGroupIdLazyRoute,
+  privatewithTabsExpensesGroupEditGroupIdLazyRoute:
+    privatewithTabsExpensesGroupEditGroupIdLazyRoute,
 }
 
 const privateRouteRouteWithChildren = privateRouteRoute._addFileChildren(

@@ -1,4 +1,4 @@
-import type { ComponentProps } from 'react';
+import type { ComponentProps, ReactElement } from 'react';
 
 export interface IconProps extends Omit<ComponentProps<'svg'>, 'children'> {
   size?: number;
@@ -174,4 +174,48 @@ export function PlaneIcon({ size = 24, className = '', ...props }: IconProps) {
       <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 00-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" strokeWidth="2" strokeLinejoin="round" />
     </svg>
   );
+}
+
+export function PencilIcon({ size = 24, className = '', ...props }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" className={className} {...props}>
+      <path d="M17 3a2.828 2.828 0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z" strokeWidth="2" strokeLinejoin="round" />
+      <path d="M15 5l4 4" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function DisketteIcon({ size = 24, className = '', ...props }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" className={className} {...props}>
+      <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" strokeWidth="2" strokeLinejoin="round" />
+      <path d="M17 21v-8H7v8" strokeWidth="2" strokeLinejoin="round" />
+      <path d="M7 3v5h8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export function getIconsByName(): Record<string, typeof DisketteIcon> {
+  return {
+    money: MoneyIcon,
+    education: EducationIcon,
+    party: PartyIcon,
+    love: LoveIcon,
+    health: HealthIcon,
+    tech: TechIcon,
+    book: BookIcon,
+    question: QuestionIcon,
+    danger: DangerIcon,
+    exclamation: ExclamationIcon,
+    food: FoodIcon,
+    home: HomeIcon,
+    bulb: BulbIcon,
+    car: CarIcon,
+    happy: HappyIcon,
+    sad: SadIcon,
+    church: ChurchIcon,
+    plane: PlaneIcon,
+    pencil: PencilIcon,
+    diskette: DisketteIcon,
+  };
 }

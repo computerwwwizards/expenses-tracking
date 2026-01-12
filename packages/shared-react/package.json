@@ -56,8 +56,8 @@
     "vitest": "^4.0.16"
   },
   "peerDependencies": {
-    "react": ">=16.9.0",
-    "react-dom": ">=16.9.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "tailwind-merge": "^3.4.0",
     "tailwind-variants": "^3.2.2"
   },

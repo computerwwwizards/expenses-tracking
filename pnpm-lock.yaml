@@ -94,7 +94,7 @@ importers:
   packages/shared-react:
     dependencies:
       react-dom:
-        specifier: '>=16.9.0'
+        specifier: ^19.2.3
         version: 19.2.3(react@19.2.3)
       tailwind-merge:
         specifier: ^3.4.0

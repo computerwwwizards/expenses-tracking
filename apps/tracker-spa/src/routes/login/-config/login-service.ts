@@ -3,7 +3,7 @@ import type { LoginCtx } from "./types";
 
 export interface LoginService {
   sendEmailForOTP(email: string): Promise<number>;
-  loginWithOTP(otp: string): Promise<void>
+  loginWithOTP(otp: string): Promise<void>;
 }
 
 

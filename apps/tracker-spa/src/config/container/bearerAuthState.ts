@@ -4,7 +4,7 @@ import type { Ctx } from "./types";
 export interface BearerAuthState {
   isAuthenticated(): Promise<boolean>;
   getAccessToken(): Promise<string>;
-  expiresAt: Date;
+  readonly expiresAt: Date;
 }
 
 export interface MockAuthBride{
@@ -50,7 +50,7 @@ if(import.meta.env.DEV)
               return dep.bearerToken ?? ''
             },
             async isAuthenticated() {
-              return dep.isAuth
+              return true
             },
           }
         }

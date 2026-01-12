@@ -25,11 +25,17 @@ declare module '@tanstack/react-router' {
 const App = () => {
   const globalContainer = useMemo(()=>{
     const container = new BasicContainer<GlobalServices>();
+
+    //Maybe we need a orchestrator fo containers
     
     container
+      // Todo we need to register fallbacks I think
+      // .useSubPlugin('alwaysAuth', 'mock')
+      // we need to create a devtools
       .useMocks()
       .use(authPlugin)
       .use(userPlugin);
+
 
     return container;
   }, [])

@@ -2,13 +2,6 @@ import * as React from 'react'
 import { Outlet, createRootRouteWithContext } from '@tanstack/react-router'
 import type { Ctx } from '../config/container/types';
 
-export interface User {
-  getFullName(): Promise<string>;
-  getEmail(): Promise<string>;
-  id: string;
-  update(fullName?: string, email?: string): Promise<void>
-}
-
 
 
 export const Route = createRootRouteWithContext<{
@@ -17,10 +10,10 @@ export const Route = createRootRouteWithContext<{
   component: RootComponent,
 })
 
-function RootComponent() {
+function RootComponent() {  
   return (
-    <React.Fragment>
+    <div className='h-screen'>
       <Outlet />
-    </React.Fragment>
+    </div>
   )
 }

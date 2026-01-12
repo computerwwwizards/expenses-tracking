@@ -1,7 +1,7 @@
 import { tv, type VariantProps } from 'tailwind-variants';
 import type { ComponentProps } from 'react';
 
-const button = tv({
+export const button = tv({
   base: [
     'inline-flex items-center justify-center',
     'px-4 py-2 rounded-lg',
@@ -17,22 +17,17 @@ const button = tv({
         'bg-blue-600 text-white',
         'hover:bg-blue-700 active:bg-blue-800',
         'focus:ring-blue-500',
-        'dark:bg-blue-500 dark:hover:bg-blue-600 dark:active:bg-blue-700',
         'shadow-sm hover:shadow-md',
       ],
       secondary: [
         'bg-gray-700 text-gray-100',
         'hover:bg-gray-600 active:bg-gray-800',
         'focus:ring-gray-500',
-        'dark:bg-gray-600 dark:hover:bg-gray-500 dark:active:bg-gray-700',
-        'dark:text-gray-50',
       ],
       tertiary: [
         'bg-transparent text-gray-700 border border-gray-300',
         'hover:bg-gray-50 active:bg-gray-100',
         'focus:ring-gray-400',
-        'dark:text-gray-300 dark:border-gray-600',
-        'dark:hover:bg-gray-800 dark:active:bg-gray-700',
       ],
     },
   },
