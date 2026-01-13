@@ -30,7 +30,7 @@ function RouteComponent() {
     icon
  } = Route.useLoaderData();
 
-  return <main>
+  return <main className='flex flex-col justify-between gap-6 h-screen'>
     <div 
       style={{
         '--custom-color': color

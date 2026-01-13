@@ -26,7 +26,7 @@ function RouteComponent() {
     variant: 'secondary'
   })
 
-  return <div>
+  return <div className='grow'>
     <Suspense>
       <ExpensesSummaryAwait
         promise={expenses}
@@ -36,7 +36,7 @@ function RouteComponent() {
       <Link
         className={linkStyles}
         from={'/$budgetId'}
-        to={'expenses'}
+        to={'expenses-group'}
       >
         Expenses
       </Link>

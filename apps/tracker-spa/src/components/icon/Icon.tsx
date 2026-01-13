@@ -195,6 +195,17 @@ export function DisketteIcon({ size = 24, className = '', ...props }: IconProps)
   );
 }
 
+export function TrashIcon({ size = 24, className = '', ...props }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" className={className} {...props}>
+      <path d="M3 6h18" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M5 6v14a2 2 0 002 2h10a2 2 0 002-2V6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M10 11v6M14 11v6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 export function getIconsByName(): Record<string, typeof DisketteIcon> {
   return {
     money: MoneyIcon,
@@ -217,5 +228,6 @@ export function getIconsByName(): Record<string, typeof DisketteIcon> {
     plane: PlaneIcon,
     pencil: PencilIcon,
     diskette: DisketteIcon,
+    trash: TrashIcon,
   };
 }

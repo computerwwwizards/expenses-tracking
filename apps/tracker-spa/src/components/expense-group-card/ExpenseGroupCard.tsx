@@ -1,13 +1,16 @@
 import type { CSSProperties, ReactNode } from 'react';
 import { EditableCard, type EditableCardProps } from '../editable-card/EditableCard';
 
-export interface ExpenseGroupCardProps extends Omit<EditableCardProps, 'itemId'> {
+export interface ExpenseGroupCardOwnProps{
   amount: number;
   name: string;
   icon: ReactNode;
   expenseId: string;
   color?: string;
 }
+
+export type ExpenseGroupCardProps = ExpenseGroupCardOwnProps & Omit<EditableCardProps, 'itemId'>
+
 
 export function ExpenseGroupCard({ 
   amount, 
