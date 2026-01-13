@@ -23,6 +23,7 @@ import { Route as privateBudgetIdExpensesGroupsRouteRouteImport } from './routes
 import { Route as privatehomeBudgetsIndexRouteImport } from './routes/(private)/(home)/budgets/index'
 import { Route as privateBudgetIdIncomesIndexRouteImport } from './routes/(private)/$budgetId/incomes/index'
 import { Route as privateBudgetIdExpensesGroupsIndexRouteImport } from './routes/(private)/$budgetId/expenses-groups/index'
+import { Route as privateBudgetIdExpensesGroupsExpenseGroupIdRouteRouteImport } from './routes/(private)/$budgetId/expenses-groups/$expense-group-id/route'
 import { Route as privateBudgetIdIncomesUpdateIndexRouteImport } from './routes/(private)/$budgetId/incomes/update/index'
 import { Route as privateBudgetIdIncomesCreateIndexRouteImport } from './routes/(private)/$budgetId/incomes/create/index'
 import { Route as privateBudgetIdExpensesGroupsEditIndexRouteImport } from './routes/(private)/$budgetId/expenses-groups/edit/index'
@@ -136,6 +137,12 @@ const privatehomeBudgetsCreateLazyRoute =
         (d) => d.Route,
       ),
     )
+const privateBudgetIdExpensesGroupsExpenseGroupIdRouteRoute =
+  privateBudgetIdExpensesGroupsExpenseGroupIdRouteRouteImport.update({
+    id: '/$expense-group-id',
+    path: '/$expense-group-id',
+    getParentRoute: () => privateBudgetIdExpensesGroupsRouteRoute,
+  } as any)
 const privateBudgetIdIncomesUpdateIndexRoute =
   privateBudgetIdIncomesUpdateIndexRouteImport
     .update({
@@ -187,9 +194,10 @@ const privateBudgetIdExpensesGroupsCreateIndexRoute =
 const privateBudgetIdExpensesGroupsExpenseGroupIdIndexRoute =
   privateBudgetIdExpensesGroupsExpenseGroupIdIndexRouteImport
     .update({
-      id: '/$expense-group-id/',
-      path: '/$expense-group-id/',
-      getParentRoute: () => privateBudgetIdExpensesGroupsRouteRoute,
+      id: '/',
+      path: '/',
+      getParentRoute: () =>
+        privateBudgetIdExpensesGroupsExpenseGroupIdRouteRoute,
     } as any)
     .lazy(() =>
       import('./routes/(private)/$budgetId/expenses-groups/$expense-group-id/index.lazy').then(
@@ -211,9 +219,10 @@ const privatehomeBudgetsEditBudgetIdLazyRoute =
 const privateBudgetIdExpensesGroupsExpenseGroupIdUpdateIndexRoute =
   privateBudgetIdExpensesGroupsExpenseGroupIdUpdateIndexRouteImport
     .update({
-      id: '/$expense-group-id/update/',
-      path: '/$expense-group-id/update/',
-      getParentRoute: () => privateBudgetIdExpensesGroupsRouteRoute,
+      id: '/update/',
+      path: '/update/',
+      getParentRoute: () =>
+        privateBudgetIdExpensesGroupsExpenseGroupIdRouteRoute,
     } as any)
     .lazy(() =>
       import('./routes/(private)/$budgetId/expenses-groups/$expense-group-id/update/index.lazy').then(
@@ -223,9 +232,10 @@ const privateBudgetIdExpensesGroupsExpenseGroupIdUpdateIndexRoute =
 const privateBudgetIdExpensesGroupsExpenseGroupIdCreateIndexRoute =
   privateBudgetIdExpensesGroupsExpenseGroupIdCreateIndexRouteImport
     .update({
-      id: '/$expense-group-id/create/',
-      path: '/$expense-group-id/create/',
-      getParentRoute: () => privateBudgetIdExpensesGroupsRouteRoute,
+      id: '/create/',
+      path: '/create/',
+      getParentRoute: () =>
+        privateBudgetIdExpensesGroupsExpenseGroupIdRouteRoute,
     } as any)
     .lazy(() =>
       import('./routes/(private)/$budgetId/expenses-groups/$expense-group-id/create/index.lazy').then(
@@ -241,12 +251,13 @@ export interface FileRoutesByFullPath {
   '/$budgetId/': typeof privateBudgetIdIndexRoute
   '/': typeof privatehomeIndexRoute
   '/login/otp': typeof LoginOtpIndexRoute
+  '/$budgetId/expenses-groups/$expense-group-id': typeof privateBudgetIdExpensesGroupsExpenseGroupIdRouteRouteWithChildren
   '/budgets/create': typeof privatehomeBudgetsCreateLazyRoute
   '/$budgetId/expenses-groups/': typeof privateBudgetIdExpensesGroupsIndexRoute
   '/$budgetId/incomes': typeof privateBudgetIdIncomesIndexRoute
   '/budgets': typeof privatehomeBudgetsIndexRoute
   '/budgets/edit/$budgetId': typeof privatehomeBudgetsEditBudgetIdLazyRoute
-  '/$budgetId/expenses-groups/$expense-group-id': typeof privateBudgetIdExpensesGroupsExpenseGroupIdIndexRoute
+  '/$budgetId/expenses-groups/$expense-group-id/': typeof privateBudgetIdExpensesGroupsExpenseGroupIdIndexRoute
   '/$budgetId/expenses-groups/create': typeof privateBudgetIdExpensesGroupsCreateIndexRoute
   '/$budgetId/expenses-groups/edit': typeof privateBudgetIdExpensesGroupsEditIndexRoute
   '/$budgetId/incomes/create': typeof privateBudgetIdIncomesCreateIndexRoute
@@ -283,6 +294,7 @@ export interface FileRoutesById {
   '/(private)/$budgetId/': typeof privateBudgetIdIndexRoute
   '/(private)/(home)/': typeof privatehomeIndexRoute
   '/login/otp/': typeof LoginOtpIndexRoute
+  '/(private)/$budgetId/expenses-groups/$expense-group-id': typeof privateBudgetIdExpensesGroupsExpenseGroupIdRouteRouteWithChildren
   '/(private)/(home)/budgets/create': typeof privatehomeBudgetsCreateLazyRoute
   '/(private)/$budgetId/expenses-groups/': typeof privateBudgetIdExpensesGroupsIndexRoute
   '/(private)/$budgetId/incomes/': typeof privateBudgetIdIncomesIndexRoute
@@ -306,12 +318,13 @@ export interface FileRouteTypes {
     | '/$budgetId/'
     | '/'
     | '/login/otp'
+    | '/$budgetId/expenses-groups/$expense-group-id'
     | '/budgets/create'
     | '/$budgetId/expenses-groups/'
     | '/$budgetId/incomes'
     | '/budgets'
     | '/budgets/edit/$budgetId'
-    | '/$budgetId/expenses-groups/$expense-group-id'
+    | '/$budgetId/expenses-groups/$expense-group-id/'
     | '/$budgetId/expenses-groups/create'
     | '/$budgetId/expenses-groups/edit'
     | '/$budgetId/incomes/create'
@@ -347,6 +360,7 @@ export interface FileRouteTypes {
     | '/(private)/$budgetId/'
     | '/(private)/(home)/'
     | '/login/otp/'
+    | '/(private)/$budgetId/expenses-groups/$expense-group-id'
     | '/(private)/(home)/budgets/create'
     | '/(private)/$budgetId/expenses-groups/'
     | '/(private)/$budgetId/incomes/'
@@ -459,6 +473,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof privatehomeBudgetsCreateLazyRouteImport
       parentRoute: typeof privatehomeRouteRoute
     }
+    '/(private)/$budgetId/expenses-groups/$expense-group-id': {
+      id: '/(private)/$budgetId/expenses-groups/$expense-group-id'
+      path: '/$expense-group-id'
+      fullPath: '/$budgetId/expenses-groups/$expense-group-id'
+      preLoaderRoute: typeof privateBudgetIdExpensesGroupsExpenseGroupIdRouteRouteImport
+      parentRoute: typeof privateBudgetIdExpensesGroupsRouteRoute
+    }
     '/(private)/$budgetId/incomes/update/': {
       id: '/(private)/$budgetId/incomes/update/'
       path: '/incomes/update'
@@ -489,10 +510,10 @@ declare module '@tanstack/react-router' {
     }
     '/(private)/$budgetId/expenses-groups/$expense-group-id/': {
       id: '/(private)/$budgetId/expenses-groups/$expense-group-id/'
-      path: '/$expense-group-id'
-      fullPath: '/$budgetId/expenses-groups/$expense-group-id'
+      path: '/'
+      fullPath: '/$budgetId/expenses-groups/$expense-group-id/'
       preLoaderRoute: typeof privateBudgetIdExpensesGroupsExpenseGroupIdIndexRouteImport
-      parentRoute: typeof privateBudgetIdExpensesGroupsRouteRoute
+      parentRoute: typeof privateBudgetIdExpensesGroupsExpenseGroupIdRouteRoute
     }
     '/(private)/(home)/budgets/edit/$budgetId': {
       id: '/(private)/(home)/budgets/edit/$budgetId'
@@ -503,44 +524,59 @@ declare module '@tanstack/react-router' {
     }
     '/(private)/$budgetId/expenses-groups/$expense-group-id/update/': {
       id: '/(private)/$budgetId/expenses-groups/$expense-group-id/update/'
-      path: '/$expense-group-id/update'
+      path: '/update'
       fullPath: '/$budgetId/expenses-groups/$expense-group-id/update'
       preLoaderRoute: typeof privateBudgetIdExpensesGroupsExpenseGroupIdUpdateIndexRouteImport
-      parentRoute: typeof privateBudgetIdExpensesGroupsRouteRoute
+      parentRoute: typeof privateBudgetIdExpensesGroupsExpenseGroupIdRouteRoute
     }
     '/(private)/$budgetId/expenses-groups/$expense-group-id/create/': {
       id: '/(private)/$budgetId/expenses-groups/$expense-group-id/create/'
-      path: '/$expense-group-id/create'
+      path: '/create'
       fullPath: '/$budgetId/expenses-groups/$expense-group-id/create'
       preLoaderRoute: typeof privateBudgetIdExpensesGroupsExpenseGroupIdCreateIndexRouteImport
-      parentRoute: typeof privateBudgetIdExpensesGroupsRouteRoute
+      parentRoute: typeof privateBudgetIdExpensesGroupsExpenseGroupIdRouteRoute
     }
   }
 }
 
-interface privateBudgetIdExpensesGroupsRouteRouteChildren {
-  privateBudgetIdExpensesGroupsIndexRoute: typeof privateBudgetIdExpensesGroupsIndexRoute
+interface privateBudgetIdExpensesGroupsExpenseGroupIdRouteRouteChildren {
   privateBudgetIdExpensesGroupsExpenseGroupIdIndexRoute: typeof privateBudgetIdExpensesGroupsExpenseGroupIdIndexRoute
-  privateBudgetIdExpensesGroupsCreateIndexRoute: typeof privateBudgetIdExpensesGroupsCreateIndexRoute
-  privateBudgetIdExpensesGroupsEditIndexRoute: typeof privateBudgetIdExpensesGroupsEditIndexRoute
   privateBudgetIdExpensesGroupsExpenseGroupIdCreateIndexRoute: typeof privateBudgetIdExpensesGroupsExpenseGroupIdCreateIndexRoute
   privateBudgetIdExpensesGroupsExpenseGroupIdUpdateIndexRoute: typeof privateBudgetIdExpensesGroupsExpenseGroupIdUpdateIndexRoute
 }
 
-const privateBudgetIdExpensesGroupsRouteRouteChildren: privateBudgetIdExpensesGroupsRouteRouteChildren =
+const privateBudgetIdExpensesGroupsExpenseGroupIdRouteRouteChildren: privateBudgetIdExpensesGroupsExpenseGroupIdRouteRouteChildren =
   {
-    privateBudgetIdExpensesGroupsIndexRoute:
-      privateBudgetIdExpensesGroupsIndexRoute,
     privateBudgetIdExpensesGroupsExpenseGroupIdIndexRoute:
       privateBudgetIdExpensesGroupsExpenseGroupIdIndexRoute,
-    privateBudgetIdExpensesGroupsCreateIndexRoute:
-      privateBudgetIdExpensesGroupsCreateIndexRoute,
-    privateBudgetIdExpensesGroupsEditIndexRoute:
-      privateBudgetIdExpensesGroupsEditIndexRoute,
     privateBudgetIdExpensesGroupsExpenseGroupIdCreateIndexRoute:
       privateBudgetIdExpensesGroupsExpenseGroupIdCreateIndexRoute,
     privateBudgetIdExpensesGroupsExpenseGroupIdUpdateIndexRoute:
       privateBudgetIdExpensesGroupsExpenseGroupIdUpdateIndexRoute,
+  }
+
+const privateBudgetIdExpensesGroupsExpenseGroupIdRouteRouteWithChildren =
+  privateBudgetIdExpensesGroupsExpenseGroupIdRouteRoute._addFileChildren(
+    privateBudgetIdExpensesGroupsExpenseGroupIdRouteRouteChildren,
+  )
+
+interface privateBudgetIdExpensesGroupsRouteRouteChildren {
+  privateBudgetIdExpensesGroupsExpenseGroupIdRouteRoute: typeof privateBudgetIdExpensesGroupsExpenseGroupIdRouteRouteWithChildren
+  privateBudgetIdExpensesGroupsIndexRoute: typeof privateBudgetIdExpensesGroupsIndexRoute
+  privateBudgetIdExpensesGroupsCreateIndexRoute: typeof privateBudgetIdExpensesGroupsCreateIndexRoute
+  privateBudgetIdExpensesGroupsEditIndexRoute: typeof privateBudgetIdExpensesGroupsEditIndexRoute
+}
+
+const privateBudgetIdExpensesGroupsRouteRouteChildren: privateBudgetIdExpensesGroupsRouteRouteChildren =
+  {
+    privateBudgetIdExpensesGroupsExpenseGroupIdRouteRoute:
+      privateBudgetIdExpensesGroupsExpenseGroupIdRouteRouteWithChildren,
+    privateBudgetIdExpensesGroupsIndexRoute:
+      privateBudgetIdExpensesGroupsIndexRoute,
+    privateBudgetIdExpensesGroupsCreateIndexRoute:
+      privateBudgetIdExpensesGroupsCreateIndexRoute,
+    privateBudgetIdExpensesGroupsEditIndexRoute:
+      privateBudgetIdExpensesGroupsEditIndexRoute,
   }
 
 const privateBudgetIdExpensesGroupsRouteRouteWithChildren =

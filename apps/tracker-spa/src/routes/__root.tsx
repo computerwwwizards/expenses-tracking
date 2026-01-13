@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { Outlet, createRootRouteWithContext } from '@tanstack/react-router'
 import type { Ctx } from '../config/container/types';
 

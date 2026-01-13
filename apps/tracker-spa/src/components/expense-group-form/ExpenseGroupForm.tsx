@@ -1,64 +1,17 @@
 "use client";
 
-import { useActionState, useState, type ReactNode } from 'react';
+import { useActionState, useCallback, useState, type ChangeEvent, type MouseEvent, type ReactNode } from 'react';
 import TextField from 'shared-react/text-field';
 import Button from 'shared-react/button';
 import Spinner from 'shared-react/spinner';
 import Chip from 'shared-react/chip';
 import {
-  MoneyIcon,
-  EducationIcon,
-  PartyIcon,
-  LoveIcon,
-  HealthIcon,
-  TechIcon,
-  BookIcon,
-  QuestionIcon,
-  DangerIcon,
-  ExclamationIcon,
-  FoodIcon,
-  HomeIcon,
-  BulbIcon,
-  CarIcon,
-  HappyIcon,
-  SadIcon,
-  ChurchIcon,
-  PlaneIcon,
+  getIconsByName
 } from '../icon/Icon';
 
-const iconComponents = {
-  money: MoneyIcon,
-  education: EducationIcon,
-  party: PartyIcon,
-  love: LoveIcon,
-  health: HealthIcon,
-  tech: TechIcon,
-  book: BookIcon,
-  question: QuestionIcon,
-  danger: DangerIcon,
-  exclamation: ExclamationIcon,
-  food: FoodIcon,
-  home: HomeIcon,
-  bulb: BulbIcon,
-  car: CarIcon,
-  happy: HappyIcon,
-  sad: SadIcon,
-  church: ChurchIcon,
-  plane: PlaneIcon,
-};
+const iconComponents = getIconsByName();
 
 export type IconName = keyof typeof iconComponents;
-
-const colors = [
-  { name: 'red', class: 'bg-red-600', textClass: 'text-red-600' },
-  { name: 'orange', class: 'bg-orange-600', textClass: 'text-orange-600' },
-  { name: 'yellow', class: 'bg-yellow-500', textClass: 'text-yellow-500' },
-  { name: 'green', class: 'bg-green-600', textClass: 'text-green-600' },
-  { name: 'blue', class: 'bg-blue-600', textClass: 'text-blue-600' },
-  { name: 'purple', class: 'bg-purple-600', textClass: 'text-purple-600' },
-  { name: 'pink', class: 'bg-pink-600', textClass: 'text-pink-600' },
-  { name: 'gray', class: 'bg-gray-600', textClass: 'text-gray-600' },
-];
 
 export interface ExpenseGroupFormValues {
   name: string;
@@ -84,13 +37,13 @@ export default function ExpenseGroupForm({
   onCancel,
 }: ExpenseGroupFormProps) {
   const [selectedIcon, setSelectedIcon] = useState<IconName>(defaultValues?.icon ?? 'money');
-  const [selectedColor, setSelectedColor] = useState(defaultValues?.color ?? 'red');
+  const [selectedColor, setSelectedColor] = useState(defaultValues?.color ?? '#dc2626');
   const [name, setName] = useState(defaultValues?.name ?? '');
 
   const [state, action, isPending] = useActionState(async (_prev: FormState | null, formData: FormData) => {
     const name = formData.get('name')?.toString() ?? '';
     const icon = formData.get('icon')?.toString() as IconName ?? 'money';
-    const color = formData.get('color')?.toString() ?? 'red';
+    const color = formData.get('color')?.toString() ?? '#dc2626';
     const description = formData.get('description')?.toString() ?? '';
 
     const values: ExpenseGroupFormValues = { name, icon, color, description };
@@ -108,7 +61,25 @@ export default function ExpenseGroupForm({
   }, null);
 
   const SelectedIconComponent = iconComponents[selectedIcon];
-  const selectedColorObj = colors.find((c) => c.name === selectedColor) ?? colors[0];
+
+  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>)=>{
+    setName(event.currentTarget.value)
+  }, [])
+
+  const handleIconSelection = useCallback((event: MouseEvent<HTMLButtonElement>)=>{
+    const { iconName } = event.currentTarget.dataset
+
+    if(!iconName)
+      return 
+  
+    setSelectedIcon(iconName)
+  }, [])
+
+  const handleColorSelection = useCallback((event: ChangeEvent<HTMLInputElement>)=>{
+    const { value } = event.currentTarget;
+
+    setSelectedColor(value);
+  }, [])
 
   return (
     <form id="expense-group-form" className="grid gap-1" action={action}>
@@ -116,7 +87,7 @@ export default function ExpenseGroupForm({
         <TextField
           name="name"
           value={name}
-          onChange={(e) => setName(e.currentTarget.value)}
+          onChange={handleChange}
           placeholder="Name of expense group"
           disabled={isPending}
           maxLength={30}
@@ -126,7 +97,6 @@ export default function ExpenseGroupForm({
       </div>
 
       <div className="grid gap-1 mt-4">
-        {/* Icon selector */}
         <div className="grid gap-2">
           <label className="font-semibold">Icon</label>
           <input type="hidden" name="icon" value={selectedIcon} />
@@ -137,7 +107,8 @@ export default function ExpenseGroupForm({
                 <button
                   key={iconName}
                   type="button"
-                  onClick={() => setSelectedIcon(iconName)}
+                  data-icon-name={iconName}
+                  onClick={handleIconSelection}
                   disabled={isPending}
                   className={`p-3 rounded-lg border-2 transition-colors shrink-0 ${
                     selectedIcon === iconName
@@ -152,38 +123,27 @@ export default function ExpenseGroupForm({
           </div>
         </div>
 
-        {/* Color selector */}
         <div className="grid gap-2 mt-2">
           <label className="font-semibold">Color</label>
-          <input type="hidden" name="color" value={selectedColor} />
-          <div className="flex gap-2 overflow-x-auto pb-2">
-            {colors.map((color) => (
-              <button
-                key={color.name}
-                type="button"
-                onClick={() => setSelectedColor(color.name)}
-                disabled={isPending}
-                className={`w-10 h-10 rounded-full border-2 transition-all shrink-0 ${color.class} ${
-                  selectedColor === color.name
-                    ? 'border-gray-900 dark:border-gray-100 scale-110'
-                    : 'border-transparent'
-                }`}
-                aria-label={color.name}
-              />
-            ))}
-          </div>
+          <input 
+            type="color" 
+            name="color" 
+            value={selectedColor}
+            onChange={handleColorSelection}
+            disabled={isPending}
+            className="w-20 h-10 rounded cursor-pointer"
+          />
         </div>
 
-        {/* Preview */}
         <div className="grid gap-2 mt-2">
           <label className="font-semibold">Preview</label>
-          <div className={`flex items-center gap-2 ${selectedColorObj.textClass}`}>
+          {/* TODO: use css vars instead of style */}
+          <div className="flex items-center gap-2" style={{ color: selectedColor }}>
             <SelectedIconComponent size={32} />
             <span className="text-lg font-medium">{name || 'Group name'}</span>
           </div>
         </div>
 
-        {/* Description */}
         <div className="mt-2">
           <TextField
             label="Description"
@@ -211,7 +171,12 @@ export default function ExpenseGroupForm({
         <Button variant="secondary" disabled={isPending}>
           {isPending ? <Spinner size="sm" /> : 'Save'}
         </Button>
-        <Button type="button" variant="tertiary" onClick={onCancel} disabled={isPending}>
+        <Button 
+          type="button" 
+          variant="tertiary" 
+          onClick={onCancel} 
+          disabled={isPending}
+        >
           Cancel
         </Button>
       </div>

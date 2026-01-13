@@ -1,11 +1,85 @@
-import { createLazyFileRoute } from '@tanstack/react-router'
+import { createLazyFileRoute } from '@tanstack/react-router';
+import { useCallback } from 'react';
+import TextField from 'shared-react/text-field';
+import Button from 'shared-react/button';
+import Spinner from 'shared-react/spinner';
+import { useActionState } from 'react';
+import type { CreateExpenseDTO } from '../-config/types';
 
 export const Route = createLazyFileRoute(
   '/(private)/$budgetId/expenses-groups/$expense-group-id/create/',
 )({
   component: RouteComponent,
-})
+});
 
 function RouteComponent() {
-  return <div>Hello "/(private)/$budgetId/$expense-group-id/create/"!</div>
+  const { "expense-group-id": groupId } = Route.useParams();
+  const { expenseGroupDetailContainer } = Route.useRouteContext() as any;
+  const navigate = Route.useNavigate();
+  const [, action, isPending] = useActionState(
+    async (_prev: any, formData: FormData) => {
+      const name = formData.get('name')?.toString() ?? '';
+      const amount = parseFloat(formData.get('amount')?.toString() ?? '0');
+
+      const values: CreateExpenseDTO = { name, amount };
+
+      try {
+        await expenseGroupDetailContainer
+          .get('expenseGroupDetailMutations')
+          .createExpense(groupId, values);
+        await navigate({
+          to: '/$budgetId/expenses-groups/$expense-group-id',
+          params: { "expense-group-id": groupId },
+        });
+        return { values };
+      } catch (error: any) {
+        return {
+          errors: [{ id: 'submit', message: error?.message ?? 'Failed to create' }],
+          values,
+        };
+      }
+    },
+    null
+  );
+
+  const handleCancel = useCallback(async () => {
+    await navigate({
+      to: '/$budgetId/expenses-groups/$expense-group-id',
+      params: { "expense-group-id": groupId },
+    });
+  }, [navigate, groupId]);
+
+  return (
+    <div className="p-4">
+      <form action={action} className="grid gap-4">
+        <TextField
+          name="name"
+          label="Expense Name"
+          placeholder="e.g., Lunch"
+          disabled={isPending}
+          required
+        />
+        <TextField
+          name="amount"
+          label="Amount"
+          type="number"
+          placeholder="0.00"
+          disabled={isPending}
+          step="0.01"
+          required
+        />
+        <Button disabled={isPending}>
+          {isPending ? <Spinner size="sm" /> : 'Create Expense'}
+        </Button>
+        <Button
+          type="button"
+          variant="tertiary"
+          onClick={handleCancel}
+          disabled={isPending}
+        >
+          Cancel
+        </Button>
+      </form>
+    </div>
+  );
 }

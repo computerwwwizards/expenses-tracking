@@ -21,7 +21,6 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     name: 'Monthly Groceries',
-    budgetAmount: 500.0,
     icon: <FoodIcon size={24} />,
     budgetId: 'groceries',
     color: '#3B82F6',
@@ -31,7 +30,6 @@ export const Default: Story = {
 export const Housing: Story = {
   args: {
     name: 'Housing',
-    budgetAmount: 2000.0,
     icon: <HomeIcon size={24} />,
     budgetId: 'housing',
     color: '#A855F7',
@@ -41,7 +39,6 @@ export const Housing: Story = {
 export const Transport: Story = {
   args: {
     name: 'Transportation',
-    budgetAmount: 300.0,
     icon: <CarIcon size={24} />,
     budgetId: 'transport',
     color: '#22C55E',
@@ -51,7 +48,6 @@ export const Transport: Story = {
 export const Healthcare: Story = {
   args: {
     name: 'Healthcare',
-    budgetAmount: 250.0,
     icon: <HealthIcon size={24} />,
     budgetId: 'healthcare',
     color: '#EF4444',
@@ -61,7 +57,6 @@ export const Healthcare: Story = {
 export const Savings: Story = {
   args: {
     name: 'Monthly Savings',
-    budgetAmount: 1000.0,
     icon: <MoneyIcon size={24} />,
     budgetId: 'savings',
     color: '#F97316',
@@ -73,7 +68,6 @@ export const List = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '400px' }}>
       <BudgetItem
         name="Monthly Groceries"
-        budgetAmount={500.0}
         icon={<FoodIcon size={24} />}
         budgetId="groceries"
         color="#3B82F6"
@@ -81,7 +75,6 @@ export const List = {
       />
       <BudgetItem
         name="Housing"
-        budgetAmount={2000.0}
         icon={<HomeIcon size={24} />}
         budgetId="housing"
         color="#A855F7"
@@ -89,7 +82,6 @@ export const List = {
       />
       <BudgetItem
         name="Transportation"
-        budgetAmount={300.0}
         icon={<CarIcon size={24} />}
         budgetId="transport"
         color="#22C55E"
@@ -97,7 +89,6 @@ export const List = {
       />
       <BudgetItem
         name="Healthcare"
-        budgetAmount={250.0}
         icon={<HealthIcon size={24} />}
         budgetId="healthcare"
         color="#EF4444"
@@ -105,7 +96,6 @@ export const List = {
       />
       <BudgetItem
         name="Monthly Savings"
-        budgetAmount={1000.0}
         icon={<MoneyIcon size={24} />}
         budgetId="savings"
         color="#F97316"

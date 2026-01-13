@@ -28,7 +28,7 @@ if(import.meta.env.DEV)
       .bind('expensesGroupsQueries', {
         provider() {
           return {
-            async getGroupExpenseById(groupExpenseId) {
+            async getGroupExpenseById() {
               return {
                 amount: 100.5,
                 createdBy: '',
@@ -37,7 +37,7 @@ if(import.meta.env.DEV)
                 name: 'Expense group 1'
               }
             },
-            async listByBudgetId(budgetId) {
+            async listByBudgetId() {
               return [
                 {
                   amount: 100.6,
@@ -48,7 +48,7 @@ if(import.meta.env.DEV)
                 }
               ]              
             },
-            async listExpensesByGroupId(groupExpenseId) {
+            async listExpensesByGroupId() {
               return [
                 {
                   amount: 19.20,

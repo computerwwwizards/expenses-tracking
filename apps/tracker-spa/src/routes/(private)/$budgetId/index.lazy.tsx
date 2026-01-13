@@ -36,7 +36,7 @@ function RouteComponent() {
       <Link
         className={linkStyles}
         from={'/$budgetId'}
-        to={'expenses-group'}
+        to={'expenses-groups'}
       >
         Expenses
       </Link>

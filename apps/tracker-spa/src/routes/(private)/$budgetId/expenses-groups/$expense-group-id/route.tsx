@@ -4,19 +4,21 @@ import type { Ctx } from './-config/types';
 import mutationsPlugin from './-config/mutations';
 import queriesPlugin from './-config/queries';
 
-export const Route = createFileRoute('/(private)/$budgetId/incomes/')({
+export const Route = createFileRoute(
+  '/(private)/$budgetId/expenses-groups/$expense-group-id'
+)({
   async beforeLoad({ context }) {
-    const incomesContainer: Ctx = new BasicChildContainer(
-      context.globalContainer
+    const expenseGroupDetailContainer: Ctx = new BasicChildContainer(
+      context.expensesGroupContainer
     );
 
-    incomesContainer
+    expenseGroupDetailContainer
       .useMocks()
       .use(queriesPlugin)
       .use(mutationsPlugin);
 
     return {
-      incomesContainer,
+      expenseGroupDetailContainer,
     };
   },
 });

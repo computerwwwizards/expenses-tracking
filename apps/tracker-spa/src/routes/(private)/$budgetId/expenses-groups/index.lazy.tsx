@@ -27,10 +27,8 @@ function RouteComponent() {
       return;
 
     await navigate({
-      to: '$expense-group-id/create',
-      params: {
-        "expense-group-id": id
-      }
+      to: 'edit',
+      search: { id },
     })
   }
 

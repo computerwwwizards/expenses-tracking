@@ -27,13 +27,13 @@ if(import.meta.env.DEV)
     ctx.bind('expensesGroupsMutations', {
       provider() {
         return {
-          async delete(id) {
+          async delete() {
             
           },
-          async update(id, data) {
+          async update() {
             
           },
-          async deleteMany(ids) {
+          async deleteMany() {
             
           },
         }
