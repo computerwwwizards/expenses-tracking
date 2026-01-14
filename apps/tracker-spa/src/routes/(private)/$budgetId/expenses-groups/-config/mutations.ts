@@ -1,10 +1,11 @@
-import type { Ctx, UpdateExpenseGroupDTO } from "./types";
+import type { BasicExpenseGroupDTO, CreateExpenseGroupDTO, Ctx, UpdateExpenseGroupDTO } from "./types";
 
 
 export interface ExpensesGroupsMutations{
   delete(id: string): Promise<void>;
   deleteMany(ids: string[]): Promise<void>;
   update(id: string,  data: UpdateExpenseGroupDTO ): Promise<void>
+  create(data: CreateExpenseGroupDTO): Promise<BasicExpenseGroupDTO>
 }
 
 declare module './types.ts'{
@@ -36,6 +37,14 @@ if(import.meta.env.DEV)
           async deleteMany() {
             
           },
+          async create(data){
+            return {
+              ...data,
+              id: '01',
+              createdBy: '',
+              amount: 0
+            }
+          }
         }
       },
     })

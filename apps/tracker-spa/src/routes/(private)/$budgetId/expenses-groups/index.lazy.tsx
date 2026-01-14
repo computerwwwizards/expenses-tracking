@@ -1,5 +1,5 @@
 import { ExpenseGroupCard, type ExpenseGroupCardOwnProps, type ExpenseGroupCardProps } from '@components/expense-group-card/ExpenseGroupCard';
-import { createLazyFileRoute, Link, useSearch } from '@tanstack/react-router'
+import { createLazyFileRoute, Link } from '@tanstack/react-router'
 import { Suspense, use, useState, type MouseEvent } from 'react';
 import { button } from 'shared-react/button';
 
@@ -22,14 +22,23 @@ function RouteComponent() {
   const navigate = Route.useNavigate();
 
   const handleEdit = async (event: MouseEvent<HTMLButtonElement>)=>{
-    const { id } = event.currentTarget.dataset;
+    const { id, color, amount, name, icon } = event.currentTarget.dataset;
 
     if(!id)
       return;
 
     await navigate({
       to: 'edit',
-      search: { id },
+      search: { 
+        id,
+        color,
+        amount,
+        name,
+        icon 
+      },
+      mask: {
+        to: 'edit'
+      }
     })
   }
 

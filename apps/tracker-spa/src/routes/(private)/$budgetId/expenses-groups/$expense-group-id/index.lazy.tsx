@@ -1,4 +1,4 @@
-import { createLazyFileRoute } from '@tanstack/react-router';
+import { createLazyFileRoute, Link } from '@tanstack/react-router';
 import { Suspense, use, useState, type MouseEvent } from 'react';
 import type { BasicExpenseDTO } from '../-config/types';
 
@@ -90,6 +90,7 @@ function RouteComponent() {
     await expenseGroupDetailContainer
       .get('expenseGroupDetailMutations')
       .deleteExpense(groupId, id);
+    
   };
 
   return (
@@ -101,16 +102,13 @@ function RouteComponent() {
           onDelete={handleDelete}
         />
       </Suspense>
-      <button
-        onClick={async () => {
-          await navigate({
-            to: 'create',
-          });
-        }}
+      <Link
+        from="/$budgetId/expenses-groups/$expense-group-id"
+        to='create'
         className="p-3 bg-green-600 hover:bg-green-700 rounded text-white font-semibold"
       >
         Create Expense
-      </button>
+      </Link>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import type { ComponentProps } from 'react';
+import type { ComponentProps, HTMLAttributes } from 'react';
 import { useState } from 'react';
 import { PencilIcon, TrashIcon } from '../icon/Icon';
 
@@ -6,7 +6,8 @@ export interface EditableCardProps extends ComponentProps<'article'> {
   onEdit?: (event: React.MouseEvent<HTMLButtonElement>) => Promise<void> | void;
   onDelete?: (event: React.MouseEvent<HTMLButtonElement>) => Promise<void> | void;
   itemId: string;
-  color?: string;
+  deleteButtonProps?:HTMLAttributes<HTMLButtonElement> & {[key: `data-${string}`]: string | undefined};
+  editButtonProps?: HTMLAttributes<HTMLButtonElement> & {[key: `data-${string}`]: string | undefined};
 }
 
 export function EditableCard({ 
@@ -14,8 +15,9 @@ export function EditableCard({
   onEdit,
   onDelete,
   itemId,
-  color,
   className = '',
+  deleteButtonProps,
+  editButtonProps,
   ...props 
 }: EditableCardProps) {
   const [isDeleting, setIsDeleting] = useState(false);
@@ -34,7 +36,7 @@ export function EditableCard({
 
   return (
     <article 
-      className={`cursor-pointer aria-disabled:cursor-not-allowed hover:bg-zinc-500 active:bg-zinc-400 w-full flex items-center justify-between p-4 bg-zinc-800 rounded-lg border border-zinc-700 shadow-lg shadow-blue-500/10 ${color ?? ''} ${className} ${isDeleting ? 'opacity-50' : ''}`}
+      className={`cursor-pointer aria-disabled:cursor-not-allowed hover:bg-zinc-500 active:bg-zinc-400 w-full flex items-center justify-between p-4 bg-zinc-800 rounded-lg border border-zinc-700 shadow-lg shadow-blue-500/10 ${className} ${isDeleting ? 'opacity-50' : ''}`}
       data-id={itemId}
       aria-disabled={isDeleting}
       {...props}
@@ -52,6 +54,7 @@ export function EditableCard({
               data-id={itemId}
               className="p-2 text-gray-400 hover:text-white hover:bg-zinc-800 rounded-md transition-colors"
               aria-label="Edit"
+              {...editButtonProps}
             >
               <PencilIcon size={20} />
             </button>
@@ -63,6 +66,7 @@ export function EditableCard({
               data-id={itemId}
               className="p-2 text-gray-400 hover:text-red-400 hover:bg-zinc-800 rounded-md transition-colors"
               aria-label="Delete"
+              {...deleteButtonProps}
             >
               <TrashIcon size={20} />
             </button>

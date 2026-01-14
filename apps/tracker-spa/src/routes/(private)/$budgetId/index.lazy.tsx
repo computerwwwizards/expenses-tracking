@@ -1,5 +1,5 @@
 import ExpensesSummary, { type ExpensesSummaryProps } from '@components/expenses-summary/ExpenseSummary'
-import { createLazyFileRoute, Link, useLoaderDeps } from '@tanstack/react-router'
+import { createLazyFileRoute, Link } from '@tanstack/react-router'
 import { Suspense, use } from 'react'
 import { button } from 'shared-react/button'
 
@@ -23,9 +23,7 @@ function ExpensesSummaryAwait({ promise }: ExpensesSummaryAwaitProps) {
 
 function RouteComponent() {
   const { expenses } = Route.useLoaderData();
-  const deps = useLoaderDeps({
-    from: '/(private)/$budgetId'
-  })
+  const deps = Route.useSearch();
 
 
   const linkStyles = button({

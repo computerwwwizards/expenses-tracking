@@ -34,7 +34,8 @@ if(import.meta.env.DEV)
                 createdBy: '',
                 icon: 'home',
                 id: '01',
-                name: 'Expense group 1'
+                name: 'Expense group 1',
+                color: 'red'
               }
             },
             async listByBudgetId() {
@@ -44,7 +45,8 @@ if(import.meta.env.DEV)
                   createdBy: '',
                   icon: 'love',
                   id: '01',
-                  name: 'Expense group 1'
+                  name: 'Expense group 1',
+                  color: 'red'
                 }
               ]              
             },

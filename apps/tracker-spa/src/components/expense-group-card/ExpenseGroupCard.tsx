@@ -7,6 +7,7 @@ export interface ExpenseGroupCardOwnProps{
   icon: ReactNode;
   expenseId: string;
   color?: string;
+  iconName: string
 }
 
 export type ExpenseGroupCardProps = ExpenseGroupCardOwnProps & Omit<EditableCardProps, 'itemId'>
@@ -19,8 +20,16 @@ export function ExpenseGroupCard({
   style, 
   color,
   expenseId,
+  iconName,
   ...props 
 }: ExpenseGroupCardProps) {
+  const dataProps = {
+    'data-name': name,
+    'data-icon': iconName,
+    'data-color': color,
+    'data-amount': amount.toString()
+  }
+  
   return (
     <EditableCard 
       style={{
@@ -28,7 +37,9 @@ export function ExpenseGroupCard({
         ...style
       } as CSSProperties}
       itemId={expenseId} 
-      {...props}>
+      {...props}
+      editButtonProps={dataProps}
+    >
       <article className="flex items-center gap-3">
         <div 
           className="text-(--custom-color) shrink-0 w-10 h-10 flex items-center justify-center"
