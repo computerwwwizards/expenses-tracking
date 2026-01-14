@@ -9,25 +9,32 @@ export const Route = createLazyFileRoute(
 })
 
 function RouteComponent() {
-  const { expensesGroupContainer } = Route.useRouteContext() as any;
+  const { expensesGroupContainer } = Route.useRouteContext();
   const { budgetId } = Route.useParams();
   const navigate = Route.useNavigate();
 
   const handleSubmit = useCallback(async (values: ExpenseGroupFormValues) => {
-    const mutations = expensesGroupContainer.get('expensesGroupsMutations') as any;
-    if (mutations && typeof mutations.create === 'function') {
-      await mutations.create(values);
-    }
+    const mutations = expensesGroupContainer.get('expensesGroupsMutations');
+
+    const { id } = await mutations.create(values);
+    
     await navigate({
-      to: '/$budgetId/expenses-groups',
-      params: { budgetId },
+      to: '/$budgetId/expenses-groups/$expense-group-id',
+      params: {
+        "expense-group-id": id
+      },
+      mask: {
+        to: '/$budgetId/expenses-groups/$expense-group-id',
+        params: {
+          "expense-group-id": id
+        }
+      }
     });
   }, [expensesGroupContainer, navigate, budgetId]);
 
   const handleCancel = useCallback(async () => {
     await navigate({
       to: '/$budgetId/expenses-groups',
-      params: { budgetId },
     });
   }, [navigate, budgetId]);
 

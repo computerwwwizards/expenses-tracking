@@ -11,6 +11,7 @@ export type BasicExpenseGroupDTO = Readonly<{
   icon: string;
   name: string;
   createdBy: string;
+  color: string;
   /**
    * This should be derived
    */
@@ -19,6 +20,7 @@ export type BasicExpenseGroupDTO = Readonly<{
 
 export type UpdateExpenseGroupDTO = Partial<Omit<BasicExpenseGroupDTO, 'id' | 'amount'>>
 
+export type CreateExpenseGroupDTO = Omit<BasicExpenseGroupDTO, 'id' | 'createdBy' | 'amount'> & Readonly<{createdBy?: string}>
 
 export type BasicExpenseDTO = Readonly<{
   id: string;

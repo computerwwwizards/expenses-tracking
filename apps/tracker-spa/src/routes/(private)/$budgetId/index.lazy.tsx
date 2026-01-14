@@ -23,9 +23,7 @@ function ExpensesSummaryAwait({ promise }: ExpensesSummaryAwaitProps) {
 
 function RouteComponent() {
   const { expenses } = Route.useLoaderData();
-  const deps = useLoaderDeps({
-    from: '/(private)/$budgetId'
-  })
+  const deps = Route.useSearch();
 
 
   const linkStyles = button({

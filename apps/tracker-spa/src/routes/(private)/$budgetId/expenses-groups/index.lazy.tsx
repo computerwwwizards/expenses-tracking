@@ -22,14 +22,23 @@ function RouteComponent() {
   const navigate = Route.useNavigate();
 
   const handleEdit = async (event: MouseEvent<HTMLButtonElement>)=>{
-    const { id } = event.currentTarget.dataset;
+    const { id, color, amount, name, icon } = event.currentTarget.dataset;
 
     if(!id)
       return;
 
     await navigate({
       to: 'edit',
-      search: { id },
+      search: { 
+        id,
+        color,
+        amount,
+        name,
+        icon 
+      },
+      mask: {
+        to: 'edit'
+      }
     })
   }
 
