@@ -17,13 +17,10 @@ export const Route = createFileRoute(
     params
   }){
 
-    const defaultValues = deps;
-
-
-    if(Object.values(defaultValues).every(Boolean)){
+    if(Object.values(deps).every(Boolean)){
       const completeDefaultValues = {
         id: params.budgetId,
-        ...defaultValues
+        ...deps
       } as { id: string; color: string; amount: number; name: string; icon:string }
 
       return {
