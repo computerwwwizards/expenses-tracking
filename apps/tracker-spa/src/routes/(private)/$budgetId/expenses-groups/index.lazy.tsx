@@ -124,7 +124,8 @@ function ExpenseGroupCardAwaitable({
     setResolvedExpenses(prev => prev.filter(expense => expense.expenseId !== id))
   }
 
-  return resolvedExpenses.map((expenseProps)=><ExpenseGroupCard 
+  return resolvedExpenses.map((expenseProps)=><ExpenseGroupCard
+    key={expenseProps.expenseId} 
     {...expenseProps}
     {...props}
     onDelete={handleDelete}

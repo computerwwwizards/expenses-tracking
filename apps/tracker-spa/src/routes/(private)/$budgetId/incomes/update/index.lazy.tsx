@@ -14,10 +14,10 @@ export const Route = createLazyFileRoute(
 function RouteComponent() {
   const { budgetId } = Route.useParams();
   const search = Route.useSearch() as { id: string };
-  const { incomesContainer } = Route.useRouteContext() as any;
+  const { incomesContainer } = Route.useRouteContext();
   const navigate = Route.useNavigate();
   const [_, action, isPending] = useActionState(
-    async (_prev: any, formData: FormData) => {
+    async (_prev: unknown, formData: FormData) => {
       const name = formData.get('name')?.toString() ?? '';
       const amount = parseFloat(formData.get('amount')?.toString() ?? '0');
 
@@ -32,9 +32,10 @@ function RouteComponent() {
           params: { budgetId },
         });
         return { values };
-      } catch (error: any) {
+      } catch (error: unknown) {
+        const internalError = error as Error | undefined
         return {
-          errors: [{ id: 'submit', message: error?.message ?? 'Failed to update' }],
+          errors: [{ id: 'submit', message: internalError?.message ?? 'Failed to update' }],
           values,
         };
       }

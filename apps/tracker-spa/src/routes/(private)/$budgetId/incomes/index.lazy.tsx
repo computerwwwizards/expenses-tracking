@@ -64,7 +64,7 @@ function IncomesListAwait({
 
 function RouteComponent() {
   const { budgetId } = Route.useParams()
-  const { incomesContainer } = Route.useRouteContext() as any
+  const { incomesContainer } = Route.useRouteContext();
   const navigate = Route.useNavigate()
 
   const incomesPromise = incomesContainer

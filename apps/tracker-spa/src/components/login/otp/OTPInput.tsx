@@ -51,7 +51,7 @@ function RedTimer({
   const handleTick = useCallback((prevEta: number, newEta: number)=>{
     setIsRed(newEta <= etaToRed);
     onTick?.(prevEta, newEta);
-  }, [onTick])
+  }, [onTick, etaToRed])
 
   return <strong 
     className={(isRed ?'text-red-500 ':' ').concat(className ?? '') } 
@@ -90,11 +90,13 @@ export default function OTPInput({
     try {
       await sendOTP?.(otp);
       return {};
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const internalError = error as Error;
+
       return {
         errors: [{
-          id: error.message,
-          message: error.message
+          id: internalError.message,
+          message: internalError.message
         }]
       };
     }
@@ -115,11 +117,12 @@ export default function OTPInput({
       const newEta = await onResend?.(email);
       setIsExpired(false)
       return { eta: newEta ?? prevState.eta};
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const internalError = error as Error;
       return {
         errors: [{
-          id: error.message,
-          message: error.message
+          id: internalError.message,
+          message: internalError.message
         }]
       };
     }

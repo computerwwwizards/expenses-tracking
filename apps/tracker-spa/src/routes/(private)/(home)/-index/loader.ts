@@ -11,7 +11,9 @@ export default async function homeLoader(
 
   const iconsByName = getIconsByName()
 
-  const latestModified =  budgetQuery.getLatestModified().then(budgets=>budgets.map(({ icon, ...rest }: any) => ({
+  const latestModified =  budgetQuery
+    .getLatestModified()
+    .then(budgets=>budgets.map(({ icon, ...rest }) => ({
       ...rest,
       icon: iconsByName[icon]({}),
       iconName: icon

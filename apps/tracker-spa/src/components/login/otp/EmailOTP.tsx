@@ -50,7 +50,7 @@ function BasicEmailTextField({
     }
 
     onChange?.(newEvent)
-  }, [])
+  }, [validateEmail, onChange])
 
   return <TextField
     {...props}
@@ -92,7 +92,9 @@ export default function EmailOTPLogin({
       return {
         email
       }
-    } catch (error: any) {
+    } catch (unknownError: unknown) {
+      const error = unknownError as Error;
+
       return {
         errors: [{
           id: error.message,

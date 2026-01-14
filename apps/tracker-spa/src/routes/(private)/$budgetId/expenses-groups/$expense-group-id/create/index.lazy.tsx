@@ -14,10 +14,10 @@ export const Route = createLazyFileRoute(
 
 function RouteComponent() {
   const { "expense-group-id": groupId } = Route.useParams();
-  const { expenseGroupDetailContainer } = Route.useRouteContext() as any;
+  const { expenseGroupDetailContainer } = Route.useRouteContext();
   const navigate = Route.useNavigate();
   const [, action, isPending] = useActionState(
-    async (_prev: any, formData: FormData) => {
+    async (_prev: unknown, formData: FormData) => {
       const name = formData.get('name')?.toString() ?? '';
       const amount = parseFloat(formData.get('amount')?.toString() ?? '0');
 
@@ -32,7 +32,8 @@ function RouteComponent() {
           params: { "expense-group-id": groupId },
         });
         return { values };
-      } catch (error: any) {
+      } catch (unknownError: unknown) {
+        const error = unknownError as Error | undefined;
         return {
           errors: [{ id: 'submit', message: error?.message ?? 'Failed to create' }],
           values,

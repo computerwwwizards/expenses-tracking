@@ -8,7 +8,7 @@
     "check": "biome check --write",
     "dev": "rsbuild dev --open",
     "format": "biome format --write",
-    "lint": "eslint .",
+    "lint": "tsgo & oxlint",
     "preview": "rsbuild preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"

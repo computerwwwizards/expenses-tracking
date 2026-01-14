@@ -48,8 +48,8 @@ export default function TransactionForm({
     try {
       await onSubmit(values);
       return { values };
-    } catch (error: any) {
-      const msg = error?.message ?? 'Failed to save income';
+    } catch (error: unknown) {
+      const msg = (error as Error | undefined)?.message ?? 'Failed to save income';
       return {
         errors: [{ id: msg, message: msg }],
         values,
