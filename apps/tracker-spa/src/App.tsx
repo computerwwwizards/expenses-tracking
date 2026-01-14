@@ -8,6 +8,7 @@ import { BasicContainer } from '@computerwwwizards/dependency-injection';
 import type { GlobalServices } from './config/container/types';
 import authPlugin from './config/container/bearerAuthState';
 import userPlugin from './config/container/user'
+import workspacePlugin from '@config/container/workspace';
 
 
 const router = createRouter({ routeTree, context: null!, defaultViewTransition: {
@@ -34,7 +35,8 @@ const App = () => {
       // we need to create a devtools
       .useMocks()
       .use(authPlugin)
-      .use(userPlugin);
+      .use(userPlugin)
+      .use(workspacePlugin);
 
 
     return container;
@@ -42,7 +44,8 @@ const App = () => {
 
   return (
     <RouterProvider 
-      router={router} 
+      router={router}
+      defaultPendingComponent={()=>'Loading'}
       context={{
         globalContainer
       }} 

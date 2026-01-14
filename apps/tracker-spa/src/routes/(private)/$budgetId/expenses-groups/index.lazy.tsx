@@ -1,5 +1,5 @@
 import { ExpenseGroupCard, type ExpenseGroupCardOwnProps, type ExpenseGroupCardProps } from '@components/expense-group-card/ExpenseGroupCard';
-import { createLazyFileRoute, Link } from '@tanstack/react-router'
+import { createLazyFileRoute, Link, useSearch } from '@tanstack/react-router'
 import { Suspense, use, useState, type MouseEvent } from 'react';
 import { button } from 'shared-react/button';
 
@@ -9,7 +9,7 @@ export const Route = createLazyFileRoute(
   component: RouteComponent,
 })
 
-interface ExpenseGroupCardsAwaitableProps extends Pick<ExpenseGroupCardProps, 'onEdit' | 'onDelete'> {
+interface ExpenseGroupCardsAwaitableProps extends Partial<ExpenseGroupCardProps> {
   promise: Promise<Array<ExpenseGroupCardOwnProps>>;
 }
 
@@ -18,6 +18,7 @@ interface ExpenseGroupCardsAwaitableProps extends Pick<ExpenseGroupCardProps, 'o
 function RouteComponent() {
   const { expensesGroups } = Route.useLoaderData();
   const {  expensesGroupContainer } = Route.useRouteContext();
+  const search = Route.useSearch()
   const navigate = Route.useNavigate();
 
   const handleEdit = async (event: MouseEvent<HTMLButtonElement>)=>{
@@ -43,6 +44,27 @@ function RouteComponent() {
       .delete(id)
     } 
 
+  const handleClick = async (event: MouseEvent<HTMLElement>)=>{
+    const { id } = event.currentTarget.dataset
+
+    if(!id)
+      return
+
+    await navigate({
+      to: '$expense-group-id',
+      params: {
+        "expense-group-id": id
+      },
+      search,
+      mask: {
+        to: '$expense-group-id',
+        params: {
+          "expense-group-id": id
+        }
+      }
+    })
+  }
+
   return <div className="flex flex-col h-full overflow-hidden">
     <ul className="flex-1 overflow-y-auto">
       <Suspense fallback="loading">
@@ -50,6 +72,7 @@ function RouteComponent() {
           promise={expensesGroups}
           onDelete={handleDelete}
           onEdit={handleEdit}
+          onClick={handleClick}
         />
       </Suspense>
     </ul>
@@ -59,6 +82,10 @@ function RouteComponent() {
         variant: 'secondary'
       })} 
       to="create"
+      search={search}
+      mask={{
+        to:"create"
+      }}
     >
       Create expense group
     </Link>

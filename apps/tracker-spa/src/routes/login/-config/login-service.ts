@@ -3,7 +3,9 @@ import type { LoginCtx } from "./types";
 
 export interface LoginService {
   sendEmailForOTP(email: string): Promise<number>;
-  loginWithOTP(otp: string): Promise<void>;
+  //TODO: this is a problem, this interface do not get the user from a specific place but is stateless
+  // is this the correct design?
+  loginWithOTP(otp: string, email?: string): Promise<{userName?: string; email?: string}>;
 }
 
 
@@ -30,10 +32,14 @@ if(import.meta.env.DEV){
         },
         provider(dep){
           return {
-            async loginWithOTP(_otp){
-              dep.isAuth = true
+            async loginWithOTP(){
+              dep.isAuth = true;
+
+              return {
+                userName: 'Shadow'
+              }
             },
-            async sendEmailForOTP(_email) {
+            async sendEmailForOTP() {
               return 20000
             },
           }

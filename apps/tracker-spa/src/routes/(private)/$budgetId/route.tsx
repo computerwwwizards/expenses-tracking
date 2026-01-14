@@ -3,23 +3,15 @@ import type { CSSProperties } from 'react';
 
 export const Route = createFileRoute('/(private)/$budgetId')({
   component: RouteComponent,
-  async loader({ context }) {
-    const workspaceService = context.globalContainer.get('workspace')
-    //TODO: we need a way to avoid triggering the requests using search params
-    const [budgetName, color, icon] = await Promise.all([
-      workspaceService.getName(),
-      workspaceService.getColor(),
-      workspaceService.getIcon()
-    ]);
-
-    const { getIconsByName } = await import('@components/icon/Icon')
-    const iconsByName = getIconsByName();
-
-    return {
-      budgetName,
-      color,
-      icon: iconsByName[icon]({})
-    }
+  loaderDeps({ search }) {
+    return search
+  },
+  async loader({ context, deps }) {
+    const loader = await import('./-route/loader')
+    return await loader.default(
+      { globalContainer: context.globalContainer },
+      deps as { color?: string; icon?: string; name?: string }
+    )
   },
 })
 
@@ -30,7 +22,7 @@ function RouteComponent() {
     icon
  } = Route.useLoaderData();
 
-  return <main className='flex flex-col justify-between gap-6 h-screen'>
+  return <main className='py-6 flex flex-col justify-between gap-6 h-full'>
     <div 
       style={{
         '--custom-color': color

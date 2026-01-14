@@ -1,5 +1,5 @@
 {
-  "name": "@computerwwwizards/expenses-tracking",
+  "name": "e2e-tracker-spa",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,10 +8,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "MIT",
+  "license": "ISC",
   "packageManager": "pnpm@10.27.0",
-  "devDependencies": {
-    "@types/node": "^25.0.8",
-    "storybook": "^10.1.11"
+  "dependencies": {
+    "@lightpanda/browser": "^1.0.1",
+    "playwright-core": "^1.57.0"
   }
 }

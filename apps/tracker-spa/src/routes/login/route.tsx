@@ -1,31 +1,13 @@
-import { BasicChildContainer } from '@computerwwwizards/dependency-injection';
-import type { GlobalServices } from '@config/container/types';
-import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
-import type { LoginContainerServices } from './-config/types';
-import plugin from './-config/login-service';
-
+import { createFileRoute, Outlet } from '@tanstack/react-router'
 
 
 
 export const Route = createFileRoute('/login')({
   component: RouteComponent,
   async beforeLoad({ context }) {
-    const isAuth = await context.globalContainer.get('bearerAuthState').isAuthenticated()
-    
-    if(isAuth){
-      throw redirect({
-        to: '/'
-      })
-    }
+    const module = await import('./-route/beforeLoad');
 
-    const container = new BasicChildContainer<
-      LoginContainerServices,
-      GlobalServices
-    >(context.globalContainer);
-
-    container
-      .useMocks()
-      .use(plugin)
+    const container = await module.default(context.globalContainer)
 
     return { container };
   }

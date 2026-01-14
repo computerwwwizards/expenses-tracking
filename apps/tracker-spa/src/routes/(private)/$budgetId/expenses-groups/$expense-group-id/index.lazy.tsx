@@ -10,8 +10,8 @@ export const Route = createLazyFileRoute(
 
 interface ExpensesListAwaitProps {
   promise: Promise<Array<BasicExpenseDTO>>;
-  onEdit: (event: MouseEvent<HTMLButtonElement>) => void;
-  onDelete: (event: MouseEvent<HTMLButtonElement>) => void;
+  onEdit: (event: MouseEvent<HTMLButtonElement>) => Promise<void>;
+  onDelete: (event: MouseEvent<HTMLButtonElement>) => Promise<void>;
 }
 
 function ExpensesListAwait({

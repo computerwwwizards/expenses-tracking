@@ -1,27 +1,19 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/(private)/(home)/')({
-  loader: async ({ context }) => {
-    const user = context.globalContainer.get('user');
-    const budgetQuery = context.budgetContainer.get("budgetQuery");
+  loaderDeps({ search }: {search : {userName?: string, email?: string}}){
 
-    const latestModified = Promise.all([
-      import('@components/icon/Icon').then(module => module.getIconsByName()),
-      budgetQuery.getLatestModified()
-    ]).then(([iconsByName, budgets]) => {
-      return budgets.map(({ icon, ...rest }) => ({
-        ...rest,
-        icon: iconsByName[icon]({})
-      }));
-    });
-
-    const [fullName, email] = await Promise.all([
-      user.getFullName(),
-      user.getEmail(),
-    ]);
-
-    return { fullName, email, latestModified };
-
+    return {
+      userName: search.userName,
+      email: search.email
+    }
+  },
+  loader: async ({ context, deps }) => {
+    const loader = await import('./-index/loader');
+    return await loader.default(
+      { globalContainer: context.globalContainer, budgetContainer: context.budgetContainer },
+      deps
+    );
   },
 })
 

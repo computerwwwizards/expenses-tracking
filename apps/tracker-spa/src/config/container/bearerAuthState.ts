@@ -50,7 +50,7 @@ if(import.meta.env.DEV)
               return dep.bearerToken ?? ''
             },
             async isAuthenticated() {
-              return true
+              return dep.isAuth
             },
           }
         }

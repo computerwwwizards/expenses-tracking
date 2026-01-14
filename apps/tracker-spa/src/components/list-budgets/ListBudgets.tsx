@@ -5,7 +5,7 @@ import type { Budget } from "../../routes/(private)/(home)/-config/types";
 import BudgetItem from "@components/budget-item/BudgetItem";
 
 interface LatestModifiedProps extends HTMLAttributes<HTMLButtonElement> {
-  promise: Promise<Readonly<Array<Omit<Budget, 'icon'> & { icon: ReactNode }>>>
+  promise: Promise<Readonly<Array<Omit<Budget, 'icon'> & { icon: ReactNode; iconName: string }>>>
   onEdit?: MouseEventHandler
 }
 
@@ -23,6 +23,7 @@ export default function BudgetListItems({
     id,
     color,
     icon,
+    iconName,
     name
   }) => <li key={id}>
       <BudgetItem
@@ -30,6 +31,9 @@ export default function BudgetListItems({
         color={color}
         icon={icon}
         name={name}
+        data-color={color}
+        data-icon={iconName}
+        data-name={name}
         {...props}
       />
     </li>)

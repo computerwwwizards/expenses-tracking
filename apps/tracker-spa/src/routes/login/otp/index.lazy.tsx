@@ -1,4 +1,4 @@
-import { createLazyFileRoute, useNavigate, useRouteContext } from '@tanstack/react-router'
+import { createLazyFileRoute } from '@tanstack/react-router'
 import OTPInput from '../../../components/login/otp/OTPInput'
 import { useCallback, useMemo } from 'react'
 
@@ -7,31 +7,30 @@ export const Route = createLazyFileRoute('/login/otp/')({
 })
 
 function RouteComponent() {
-  const { email, eta } = useRouteContext({
-    from: '/login/otp/'
-  })
-
-  const { container } = useRouteContext({
-    from: '/login',
-  })
+  const { container, email, eta  } = Route.useRouteContext()
 
   const loginService = useMemo(()=>{
     return container.get('loginService')
   }, [container])
 
-  const navigate = useNavigate({
-    from: '/login/otp'
-  })
+  const navigate = Route.useNavigate()
 
   const handleSendOTP = useCallback(async (otp: string)=>{
-    await loginService.loginWithOTP(otp)
+    const { userName } = await loginService.loginWithOTP(otp, email)
 
     await navigate({
-      to: '/'
+      to: '/',
+      search: {
+        email,
+        userName
+      },
+      mask:{
+        to: '/'
+      }
     })
-  }, [loginService])
+  }, [loginService, email, navigate])
 
-  return <main className='grid self-center grow place-content-center-safe'>
+  return <main className='grid self-center grow place-content-center-safe h-full'>
     <OTPInput 
       onResend={loginService.sendEmailForOTP}
       email={email}

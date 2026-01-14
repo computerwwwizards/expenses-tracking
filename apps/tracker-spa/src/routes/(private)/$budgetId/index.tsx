@@ -37,6 +37,7 @@ export const Route = createFileRoute('/(private)/$budgetId/')({
         .listAllGroups(params.budgetId)
     }
   },
+  remountDeps: ()=>false
 })
 
 

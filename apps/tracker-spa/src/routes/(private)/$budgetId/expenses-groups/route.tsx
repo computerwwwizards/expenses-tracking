@@ -19,7 +19,5 @@ export const Route = createFileRoute('/(private)/$budgetId/expenses-groups')({
       expensesGroupContainer
     }
   },
-  
-
 })
 

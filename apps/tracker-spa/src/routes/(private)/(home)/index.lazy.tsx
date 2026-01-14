@@ -1,8 +1,7 @@
 import BudgetListItems from '@components/list-budgets/ListBudgets';
-import { createLazyFileRoute, Link, useNavigate } from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router';
+import { createLazyFileRoute } from '@tanstack/react-router'
 import { Suspense, useCallback, type MouseEvent } from 'react';
-
-
 import { button } from 'shared-react/button';
 
 
@@ -17,22 +16,34 @@ export const Route = createLazyFileRoute('/(private)/(home)/')({
 function RouteComponent() {
   const data = Route.useLoaderData();
   const { fullName, email, latestModified } = data ?? {};
-  const navigate = useNavigate({
-    from: '/'
-  })
+  const navigate = Route.useNavigate()
 
   const handleClick = useCallback((event: MouseEvent<HTMLButtonElement>)=>{
-    const budgetId = event.currentTarget.dataset.id;
+    const { dataset } = event.currentTarget
+    const budgetId = dataset.id;
     if(!budgetId)
       return;
-  
+    
+    const { color, icon, name } = dataset
+
     navigate({
       to: '/$budgetId',
       params: {
         budgetId
+      },
+      search: {
+        color,
+        icon,
+        name
+      },
+      mask:{
+        to: '/$budgetId',
+        params:{
+          budgetId
+        }
       }
     })
-  }, [])
+  }, [navigate])
 
   return (
     <main className="flex flex-col justify-between gap-6 h-full px-2 py-5">
@@ -48,12 +59,15 @@ function RouteComponent() {
         <ul className='flex flex-col gap-5'>
           <Suspense fallback={'loading'}>
             <BudgetListItems
-            onClick={handleClick}
-            promise={latestModified}
-          />
+              onClick={handleClick}
+              promise={latestModified}
+            />
           </Suspense>
           <li>
-            <Link className={'text-cyan-400'} to={'/budgets'} >
+            <Link 
+              className={'text-cyan-400'} 
+              to={'/budgets'} 
+            >
               See all...
             </Link>
           </li>

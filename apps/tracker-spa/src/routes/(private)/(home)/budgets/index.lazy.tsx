@@ -39,7 +39,7 @@ function RouteComponent() {
         budgetId
       }
     })
-  }, [])
+  }, [navigate])
 
   return <main className='h-screen flex flex-col gap-5 px-3 py-5'>
     <h2 className='font-extrabold text-2xl'>Your <span className='text-blue-500'>Budgets</span></h2>

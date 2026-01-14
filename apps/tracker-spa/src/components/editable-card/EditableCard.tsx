@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react';
 import { useState } from 'react';
 import { PencilIcon, TrashIcon } from '../icon/Icon';
 
-export interface EditableCardProps extends ComponentProps<'button'> {
+export interface EditableCardProps extends ComponentProps<'article'> {
   onEdit?: (event: React.MouseEvent<HTMLButtonElement>) => Promise<void> | void;
   onDelete?: (event: React.MouseEvent<HTMLButtonElement>) => Promise<void> | void;
   itemId: string;
@@ -33,10 +33,10 @@ export function EditableCard({
   };
 
   return (
-    <button 
-      className={`hover:bg-zinc-500 active:bg-zinc-400 w-full flex items-center justify-between p-4 bg-zinc-800 rounded-lg border border-zinc-700 shadow-lg shadow-blue-500/10 ${color ?? ''} ${className} ${isDeleting ? 'opacity-50' : ''}`}
+    <article 
+      className={`cursor-pointer aria-disabled:cursor-not-allowed hover:bg-zinc-500 active:bg-zinc-400 w-full flex items-center justify-between p-4 bg-zinc-800 rounded-lg border border-zinc-700 shadow-lg shadow-blue-500/10 ${color ?? ''} ${className} ${isDeleting ? 'opacity-50' : ''}`}
       data-id={itemId}
-      disabled={isDeleting}
+      aria-disabled={isDeleting}
       {...props}
     >
       <div className="flex-1 flex items-center gap-3">
@@ -69,6 +69,6 @@ export function EditableCard({
           )}
         </div>
       )}
-    </button>
+    </article>
   );
 }

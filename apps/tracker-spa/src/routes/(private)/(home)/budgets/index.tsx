@@ -18,7 +18,8 @@ export const Route = createFileRoute('/(private)/(home)/budgets/')({
         ...rest
       })=>({
         ...rest,
-        icon: (iconsByName[icon] ?? nullFn)({})
+        icon: (iconsByName[icon] ?? nullFn)({}),
+        iconName: icon
       }))
     })
 

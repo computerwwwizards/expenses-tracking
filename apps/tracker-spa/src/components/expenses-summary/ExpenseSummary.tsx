@@ -59,7 +59,7 @@ export default function ExpensesSummary({
   outerRadius = 120,
   labelRadius = 135,
   groupNameRadius = 75,
-  outerLabelClassName = "text-xs font-bold fill-gray-800",
+  outerLabelClassName = "text-xs font-bold fill-white",
   innerLabelClassName = "text-xs font-semibold fill-white",
   width = 150,
   height = 150,
@@ -75,7 +75,6 @@ export default function ExpensesSummary({
       viewBox="0 0 300 300"
       width={width}
       height={height}
-      className="w-full h-full"
       style={{ margin: "0 auto" }}
     >
       {expenses.map(({ groupName, amount, color }, index) => {

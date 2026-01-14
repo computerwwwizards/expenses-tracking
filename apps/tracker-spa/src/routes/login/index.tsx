@@ -37,7 +37,7 @@ function RouteComponent() {
     })
   }
 
-  return <main className="grow grid place-content-center-safe">
+  return <main className="grow grid place-content-center-safe h-full">
     <EmailOTPLogin
       sendEmail={onSendMail}
     />
