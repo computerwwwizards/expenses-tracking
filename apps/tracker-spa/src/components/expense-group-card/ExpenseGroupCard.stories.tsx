@@ -25,7 +25,8 @@ export const Default: Story = {
     amount: 450.00,
     icon: <FoodIcon size={24} />,
     expenseId: 'groceries',
-    color: '#3B82F6'
+    color: '#3B82F6',
+    iconName: 'food'
   },
 };
 
@@ -35,7 +36,8 @@ export const WithoutEdit: Story = {
     amount: 120.50,
     icon: <CarIcon size={24} />,
     expenseId: 'transportation',
-    color: '#22C55E'
+    color: '#22C55E',
+    iconName: 'car'
   },
 };
 
@@ -45,7 +47,8 @@ export const LargeAmount: Story = {
     amount: 2500.00,
     icon: <HomeIcon size={24} />,
     expenseId: 'rent',
-    color: '#A855F7'
+    color: '#A855F7',
+    iconName: 'home'
   },
 };
 
@@ -55,7 +58,8 @@ export const SmallAmount: Story = {
     amount: 4.50,
     icon: <MoneyIcon size={24} />,
     expenseId: 'coffee',
-    color: '#F97316'
+    color: '#F97316',
+    iconName: 'money'
   },
 };
 
@@ -65,7 +69,8 @@ export const Healthcare: Story = {
     amount: 350.75,
     icon: <HealthIcon size={24} />,
     expenseId: 'medical',
-    color: '#EF4444'
+    color: '#EF4444',
+    iconName: 'health'
   },
 };
 
@@ -74,6 +79,7 @@ export const List = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       <ExpenseGroupCard
         name="Groceries"
+        iconName='food'
         amount={450.00}
         icon={<FoodIcon size={24} />}
         expenseId="groceries"
@@ -81,6 +87,7 @@ export const List = {
         onEdit={()=>{}}
       />
       <ExpenseGroupCard
+        iconName='car'
         name="Transportation"
         amount={120.50}
         icon={<CarIcon size={24} />}
@@ -90,6 +97,7 @@ export const List = {
       />
       <ExpenseGroupCard
         name="Rent"
+        iconName='home'
         amount={2500.00}
         icon={<HomeIcon size={24} />}
         expenseId="rent"
@@ -97,6 +105,7 @@ export const List = {
         onEdit={()=>{}}
       />
       <ExpenseGroupCard
+        iconName='health'
         name="Medical"
         amount={350.75}
         icon={<HealthIcon size={24} />}
@@ -105,6 +114,7 @@ export const List = {
         onEdit={()=>{}}
       />
       <ExpenseGroupCard
+        iconName='money'
         name="Coffee"
         amount={4.50}
         icon={<MoneyIcon size={24} />}

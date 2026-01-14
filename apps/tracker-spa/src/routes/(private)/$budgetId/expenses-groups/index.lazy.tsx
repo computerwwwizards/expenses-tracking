@@ -1,5 +1,5 @@
 import { ExpenseGroupCard, type ExpenseGroupCardOwnProps, type ExpenseGroupCardProps } from '@components/expense-group-card/ExpenseGroupCard';
-import { createLazyFileRoute, Link, useSearch } from '@tanstack/react-router'
+import { createLazyFileRoute, Link } from '@tanstack/react-router'
 import { Suspense, use, useState, type MouseEvent } from 'react';
 import { button } from 'shared-react/button';
 

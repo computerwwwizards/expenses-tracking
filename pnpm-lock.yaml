@@ -11,6 +11,9 @@ importers:
       '@types/node':
         specifier: ^25.0.8
         version: 25.0.8
+      '@typescript/native-preview':
+        specifier: 7.0.0-dev.20260114.1
+        version: 7.0.0-dev.20260114.1
       storybook:
         specifier: ^10.1.11
         version: 10.1.11(@testing-library/dom@10.4.1)(prettier@3.7.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -132,7 +135,7 @@ importers:
         version: 1.4.2(@rsbuild/core@1.7.2)
       '@rslib/core':
         specifier: ^0.19.1
-        version: 0.19.1(typescript@5.9.3)
+        version: 0.19.1(@typescript/native-preview@7.0.0-dev.20260114.1)(typescript@5.9.3)
       '@storybook/addon-docs':
         specifier: ^10.1.10
         version: 10.1.11(@types/react@19.2.7)(esbuild@0.27.2)(rollup@4.55.1)(storybook@10.1.11(@testing-library/dom@10.4.1)(prettier@3.7.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(vite@7.3.1(@types/node@25.0.8)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.21.0))(webpack@5.104.1(esbuild@0.27.2))
@@ -168,7 +171,7 @@ importers:
         version: 10.1.11(@testing-library/dom@10.4.1)(prettier@3.7.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       storybook-addon-rslib:
         specifier: ^3.2.0
-        version: 3.2.0(@rsbuild/core@1.7.2)(@rslib/core@0.19.1(typescript@5.9.3))(storybook-builder-rsbuild@3.2.0(@rsbuild/core@1.7.2)(@rspack/core@1.7.1(@swc/helpers@0.5.18))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(storybook@10.1.11(@testing-library/dom@10.4.1)(prettier@3.7.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3)(vite@7.3.1(@types/node@25.0.8)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.21.0)))(typescript@5.9.3)
+        version: 3.2.0(@rsbuild/core@1.7.2)(@rslib/core@0.19.1(@typescript/native-preview@7.0.0-dev.20260114.1)(typescript@5.9.3))(storybook-builder-rsbuild@3.2.0(@rsbuild/core@1.7.2)(@rspack/core@1.7.1(@swc/helpers@0.5.18))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(storybook@10.1.11(@testing-library/dom@10.4.1)(prettier@3.7.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3)(vite@7.3.1(@types/node@25.0.8)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.21.0)))(typescript@5.9.3)
       storybook-react-rsbuild:
         specifier: ^3.2.0
         version: 3.2.0(@rsbuild/core@1.7.2)(@rspack/core@1.7.1(@swc/helpers@0.5.18))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(rollup@4.55.1)(storybook@10.1.11(@testing-library/dom@10.4.1)(prettier@3.7.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3)(vite@7.3.1(@types/node@25.0.8)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.21.0))(webpack@5.104.1(esbuild@0.27.2))
@@ -1383,6 +1386,45 @@ packages:
   '@typescript-eslint/visitor-keys@8.52.0':
     resolution: {integrity: sha512-ink3/Zofus34nmBsPjow63FP5M7IGff0RKAgqR6+CFpdk22M7aLwC9gOcLGYqr7MczLPzZVERW9hRog3O4n1sQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20260114.1':
+    resolution: {integrity: sha512-M4t1jMeKB0MKVDHHDHbhKi6RP2VbhE9iA2ih362SLx3dfas9nU3QLVnQClRMX8hfZtFucppSY3M2FCa3amKNgQ==}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@typescript/native-preview-darwin-x64@7.0.0-dev.20260114.1':
+    resolution: {integrity: sha512-JnJV6AHhO37+o+RuK8opQ5sll0swoTLepDhlDvLU/pkuo5BbZl4AyAHDGZR1hxhCmrgPTGsmr4LSQ2TxpgknSw==}
+    cpu: [x64]
+    os: [darwin]
+
+  '@typescript/native-preview-linux-arm64@7.0.0-dev.20260114.1':
+    resolution: {integrity: sha512-eZwbwGWDclPDJAMXzpexuZBc2ZSq86T2UPDyLehKDCfrdrZcBunfYkBLX7vHnIjzbCopanMXGWVUn4eE0uK7tw==}
+    cpu: [arm64]
+    os: [linux]
+
+  '@typescript/native-preview-linux-arm@7.0.0-dev.20260114.1':
+    resolution: {integrity: sha512-bdY1aBmiawgH7vOXXrjEINhTDtss5DrlmuKmcm40lSLGOnhkZGlHSHktZej2K+b/lWKUc/a62iD/5627yXo/5g==}
+    cpu: [arm]
+    os: [linux]
+
+  '@typescript/native-preview-linux-x64@7.0.0-dev.20260114.1':
+    resolution: {integrity: sha512-4uFSvsNSko9augp/bw9PEXtdV1gg8aesrnUfIm6xYab+CmE3+PMbNncp53lZEow8Tp+lcGYNOPPFF0SQHwkcRg==}
+    cpu: [x64]
+    os: [linux]
+
+  '@typescript/native-preview-win32-arm64@7.0.0-dev.20260114.1':
+    resolution: {integrity: sha512-oEQFvvgzfWoMpzkFIjgNuUrZuzbPxLKt2IAnc2M91nrFhOPRa2Cf74M8+mFUXVA5wLyg8M5YW1Q2JKL0olxqcg==}
+    cpu: [arm64]
+    os: [win32]
+
+  '@typescript/native-preview-win32-x64@7.0.0-dev.20260114.1':
+    resolution: {integrity: sha512-kYymlGjzvujMrq8/mjg0akfq4rMMXWeqDp/hKNXKPK463CFzvla1KmF9jEEGDEasMb38rA6c7tHdzwX9yHS+ew==}
+    cpu: [x64]
+    os: [win32]
+
+  '@typescript/native-preview@7.0.0-dev.20260114.1':
+    resolution: {integrity: sha512-s7G8VkqtBB8I/VX/EUfknefv+R4zIjjKpDZbyjkAozydwYvPXQlkvEz7Gs819Z28p+agcs5+tTNECJFqjK8DPg==}
+    hasBin: true
 
   '@vitest/expect@3.2.4':
     resolution: {integrity: sha512-Io0yyORnB6sikFlt8QW5K7slY4OjqNX9jmJQ02QDda8lyM6B5oNgVWoSoKPac8/kgnCUzuHQKrSLtu/uOqqrig==}
@@ -3880,10 +3922,10 @@ snapshots:
       - '@rspack/core'
       - typescript
 
-  '@rslib/core@0.19.1(typescript@5.9.3)':
+  '@rslib/core@0.19.1(@typescript/native-preview@7.0.0-dev.20260114.1)(typescript@5.9.3)':
     dependencies:
       '@rsbuild/core': 1.7.2
-      rsbuild-plugin-dts: 0.19.1(@rsbuild/core@1.7.2)(typescript@5.9.3)
+      rsbuild-plugin-dts: 0.19.1(@rsbuild/core@1.7.2)(@typescript/native-preview@7.0.0-dev.20260114.1)(typescript@5.9.3)
     optionalDependencies:
       typescript: 5.9.3
     transitivePeerDependencies:
@@ -4442,6 +4484,37 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 8.52.0
       eslint-visitor-keys: 4.2.1
+
+  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20260114.1':
+    optional: true
+
+  '@typescript/native-preview-darwin-x64@7.0.0-dev.20260114.1':
+    optional: true
+
+  '@typescript/native-preview-linux-arm64@7.0.0-dev.20260114.1':
+    optional: true
+
+  '@typescript/native-preview-linux-arm@7.0.0-dev.20260114.1':
+    optional: true
+
+  '@typescript/native-preview-linux-x64@7.0.0-dev.20260114.1':
+    optional: true
+
+  '@typescript/native-preview-win32-arm64@7.0.0-dev.20260114.1':
+    optional: true
+
+  '@typescript/native-preview-win32-x64@7.0.0-dev.20260114.1':
+    optional: true
+
+  '@typescript/native-preview@7.0.0-dev.20260114.1':
+    optionalDependencies:
+      '@typescript/native-preview-darwin-arm64': 7.0.0-dev.20260114.1
+      '@typescript/native-preview-darwin-x64': 7.0.0-dev.20260114.1
+      '@typescript/native-preview-linux-arm': 7.0.0-dev.20260114.1
+      '@typescript/native-preview-linux-arm64': 7.0.0-dev.20260114.1
+      '@typescript/native-preview-linux-x64': 7.0.0-dev.20260114.1
+      '@typescript/native-preview-win32-arm64': 7.0.0-dev.20260114.1
+      '@typescript/native-preview-win32-x64': 7.0.0-dev.20260114.1
 
   '@vitest/expect@3.2.4':
     dependencies:
@@ -5757,11 +5830,12 @@ snapshots:
 
   rrweb-cssom@0.8.0: {}
 
-  rsbuild-plugin-dts@0.19.1(@rsbuild/core@1.7.2)(typescript@5.9.3):
+  rsbuild-plugin-dts@0.19.1(@rsbuild/core@1.7.2)(@typescript/native-preview@7.0.0-dev.20260114.1)(typescript@5.9.3):
     dependencies:
       '@ast-grep/napi': 0.37.0
       '@rsbuild/core': 1.7.2
     optionalDependencies:
+      '@typescript/native-preview': 7.0.0-dev.20260114.1
       typescript: 5.9.3
 
   rsbuild-plugin-html-minifier-terser@1.1.2(@rsbuild/core@1.7.2):
@@ -5890,10 +5964,10 @@ snapshots:
 
   std-env@3.10.0: {}
 
-  storybook-addon-rslib@3.2.0(@rsbuild/core@1.7.2)(@rslib/core@0.19.1(typescript@5.9.3))(storybook-builder-rsbuild@3.2.0(@rsbuild/core@1.7.2)(@rspack/core@1.7.1(@swc/helpers@0.5.18))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(storybook@10.1.11(@testing-library/dom@10.4.1)(prettier@3.7.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3)(vite@7.3.1(@types/node@25.0.8)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.21.0)))(typescript@5.9.3):
+  storybook-addon-rslib@3.2.0(@rsbuild/core@1.7.2)(@rslib/core@0.19.1(@typescript/native-preview@7.0.0-dev.20260114.1)(typescript@5.9.3))(storybook-builder-rsbuild@3.2.0(@rsbuild/core@1.7.2)(@rspack/core@1.7.1(@swc/helpers@0.5.18))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(storybook@10.1.11(@testing-library/dom@10.4.1)(prettier@3.7.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3)(vite@7.3.1(@types/node@25.0.8)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.21.0)))(typescript@5.9.3):
     dependencies:
       '@rsbuild/core': 1.7.2
-      '@rslib/core': 0.19.1(typescript@5.9.3)
+      '@rslib/core': 0.19.1(@typescript/native-preview@7.0.0-dev.20260114.1)(typescript@5.9.3)
       storybook-builder-rsbuild: 3.2.0(@rsbuild/core@1.7.2)(@rspack/core@1.7.1(@swc/helpers@0.5.18))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(storybook@10.1.11(@testing-library/dom@10.4.1)(prettier@3.7.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3)(vite@7.3.1(@types/node@25.0.8)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.21.0))
     optionalDependencies:
       typescript: 5.9.3
