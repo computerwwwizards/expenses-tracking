@@ -206,6 +206,7 @@ export function TrashIcon({ size = 24, className = '', ...props }: IconProps) {
   );
 }
 
+/* oxlint-disable react-refresh/only-export-components */
 export function getIconsByName(): Record<string, typeof DisketteIcon> {
   return {
     money: MoneyIcon,

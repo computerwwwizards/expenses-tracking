@@ -25,7 +25,7 @@ function RouteComponent() {
         budgetId
       }
     })
-  }, []);
+  }, [navigate]);
 
   const handleClick = useCallback((event: MouseEvent<HTMLButtonElement>)=>{
     const budgetId = event.currentTarget.dataset.id;

@@ -51,8 +51,8 @@ export default function ExpenseGroupForm({
     try {
       await onSubmit(values);
       return { values };
-    } catch (error: any) {
-      const msg = error?.message ?? 'Failed to save expense group';
+    } catch (error: unknown) {
+      const msg = (error as Error | undefined)?.message ?? 'Failed to save expense group';
       return {
         errors: [{ id: msg, message: msg }],
         values,

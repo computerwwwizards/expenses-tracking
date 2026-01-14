@@ -13,6 +13,8 @@
   "devDependencies": {
     "@types/node": "^25.0.8",
     "@typescript/native-preview": "7.0.0-dev.20260114.1",
+    "eslint-plugin-oxlint": "^1.39.0",
+    "oxlint": "^1.39.0",
     "storybook": "^10.1.11"
   }
 }

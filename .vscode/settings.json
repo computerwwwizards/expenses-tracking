@@ -3,7 +3,9 @@
     "autoinfered",
     "computerwwwizards",
     "lightpanda",
+    "oxlint",
     "rsbuild",
-    "rspack"
+    "rspack",
+    "tsgo"
   ]
 }

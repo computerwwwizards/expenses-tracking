@@ -10,7 +10,7 @@ export const Route = createLazyFileRoute(
 
 function RouteComponent() {
   const { expensesGroupContainer } = Route.useRouteContext();
-  const { budgetId } = Route.useParams();
+  
   const navigate = Route.useNavigate();
 
   const handleSubmit = useCallback(async (values: ExpenseGroupFormValues) => {
@@ -30,13 +30,13 @@ function RouteComponent() {
         }
       }
     });
-  }, [expensesGroupContainer, navigate, budgetId]);
+  }, [expensesGroupContainer, navigate]);
 
   const handleCancel = useCallback(async () => {
     await navigate({
       to: '/$budgetId/expenses-groups',
     });
-  }, [navigate, budgetId]);
+  }, [navigate]);
 
   return (
     <div className="p-3">
